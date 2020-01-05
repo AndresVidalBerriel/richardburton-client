@@ -5,7 +5,8 @@ module.exports = {
     entry: path.join(__dirname, "./src/index.jsx"),
     output: {
         filename: "bundle.[hash].js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/"
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -44,6 +45,7 @@ module.exports = {
     },
 
     devServer: {
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
     }
 };

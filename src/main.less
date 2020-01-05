@@ -12,10 +12,39 @@ body {
 
 * {
     box-sizing: border-box;
-    overflow: auto;
 
     font-family: @font-primary;
-    color: @text-primary;
-
     text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+}
+
+.ant-modal-content {
+    padding: 20px;
+}
+
+.ant-modal-header {
+    border: none;
+    box-shadow: @shadow-header-content;
+    padding: 20px;
+
+    i {
+        font-size: 30px;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+
+    h2 {
+        font-size: large;
+        font-weight: lighter;
+        margin: 0;
+
+        span {
+            vertical-align: middle;
+        }
+    }
+}
+
+.ant-modal-footer {
+    border: none;
+    box-shadow: @shadow-footer-content;
+    padding: 20px;
 }

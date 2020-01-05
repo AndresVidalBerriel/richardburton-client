@@ -1,0 +1,42 @@
+form {
+    display: flex;
+    flex-direction: column;
+
+    .form-input {
+        display: flex;
+        position: relative;
+
+        label {
+            align-self: flex-start;
+
+            padding-right: 15px;
+            margin-top: auto;
+            margin-bottom: auto;
+
+            text-align: right;
+
+            &:after {
+                content: ":";
+            }
+
+            &[required]:before {
+                content: "* ";
+                color: red;
+            }
+        }
+
+        .input-wrapper {
+            flex: 1;
+
+            footer {
+                position: absolute;
+
+                font-size: small;
+            }
+        }
+    }
+
+    .form-input:not(:last-child) {
+        margin-bottom: 30px;
+    }
+}

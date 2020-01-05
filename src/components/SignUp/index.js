@@ -2,7 +2,6 @@ import React from "react";
 
 import SignUpForm from "components/SignUp/Form";
 
-import "antd/dist/antd.less";
 import "./style.less";
 
 export default function SignUp() {

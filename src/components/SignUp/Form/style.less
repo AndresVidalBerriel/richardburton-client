@@ -1,33 +1,17 @@
-form {
-    max-width: 560px;
+form#sign-up-form {
+    width: 550px;
 
     .form-input {
-        display: flex;
-
         label {
-            padding-right: 15px;
-            margin-top: auto;
-            margin-bottom: auto;
-
-            text-align: right;
             width: 140px;
-
-            &:after {
-                content: ":";
-            }
-
-            &[required]:before {
-                content: "* ";
-                color: red;
-            }
-        }
-
-        input {
-            flex: 1;
         }
     }
 
-    .form-input:not(:last-child) {
-        margin-bottom: 20px;
+    button {
+        margin-left: auto;
+
+        span {
+            vertical-align: middle;
+        }
     }
 }

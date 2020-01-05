@@ -6,6 +6,7 @@ import App from "components/App";
 
 import { store } from "store";
 
+import "antd/dist/antd.less";
 import "main.less";
 
 ReactDOM.render(

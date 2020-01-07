@@ -5,32 +5,16 @@
     flex-direction: column;
     height: 100%;
 
-    > header {
-        background-color: @color-primary-dark;
-        box-shadow: @shadow-header;
-        padding: 7px 20px;
+    > section {
+        display: flex;
+        flex: 1;
 
-        h1 {
-            color: @text-white;
-            font-weight: normal;
-            font-size: x-large;
-            margin: 0;
-
-            width: 205.55px;
-            text-align: center;
-        }
-
-        + section {
+        > main {
             display: flex;
             flex: 1;
 
-            > main {
-                display: flex;
-                flex: 1;
-
-                box-shadow: @shadow-card;
-                margin: 20px;
-            }
+            box-shadow: @shadow-card;
+            margin: 20px;
         }
     }
 }

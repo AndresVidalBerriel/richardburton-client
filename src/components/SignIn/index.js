@@ -1,17 +1,28 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Modal } from "antd";
+import { Modal, Button } from "antd";
 
 import FormInput from "components/utils/FormInput";
 import { useInput } from "utils/hooks";
 
-import { signIn } from "store/session/actions";
+import { signIn, setSessionError } from "store/session/actions";
+
+import validateForm from "utils/validators/validateForm";
+import { inputRules } from "components/SignIn/rules";
 
 import "./style.less";
+import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 export default function SignIn({ visible, setVisible }) {
     const dispatch = useDispatch();
+    const sessionLoading = useSelector(state => state.session.loading);
+    const sessionError = useSelector(state => state.session.error);
+    const loggedUser = useSelector(state => state.session.user);
+
+    useEffect(() => {
+        if (loggedUser !== undefined) setVisible(false);
+    });
 
     const inputs = {
         email: useInput(""),
@@ -19,16 +30,27 @@ export default function SignIn({ visible, setVisible }) {
     };
 
     const closeModal = () => {
+        Object.keys(inputs).forEach(name => inputs[name].setValue(""));
         setVisible(false);
     };
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+        dispatch(setSessionError(undefined));
 
-        dispatch(signIn(email, password));
+        Object.keys(inputs).forEach(name => {
+            const input = inputs[name];
+            input.value = removeWhitespaceExcess(input.value);
+            input.setValue(input.value);
+        });
+
+        const isValid = validateForm(inputs, inputRules);
+
+        if (isValid)
+            dispatch(
+                signIn(inputs.email.value, getHash(inputs.password.value))
+            );
     };
 
     const modalHeader = (
@@ -40,16 +62,26 @@ export default function SignIn({ visible, setVisible }) {
         </h2>
     );
 
+    const modalFooter = (
+        <>
+            <span className="error">{sessionError}</span>
+
+            <Button htmlType="submit" type="primary" form="sign-in-form">
+                Sign in
+            </Button>
+        </>
+    );
+
     return (
         <Modal
             className="sign-in-modal"
             title={modalHeader}
             visible={visible}
-            onOk={closeModal}
-            confirmLoading={false}
+            confirmLoading={sessionLoading}
             onCancel={closeModal}
+            footer={modalFooter}
         >
-            <form id="sign-in-form">
+            <form id="sign-in-form" onSubmit={handleSubmit} noValidate>
                 <FormInput
                     form="sign-up-form"
                     name="email"

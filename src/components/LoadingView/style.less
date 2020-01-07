@@ -1,0 +1,26 @@
+@import "../../theme.less";
+
+.loading-view {
+    display: flex;
+    width: 100%;
+
+    .loading-content {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+
+        .spinner {
+            margin: 0 auto;
+
+            i {
+                font-size: 45px;
+            }
+        }
+
+        span {
+            margin-top: 15px;
+            color: @color-info;
+            user-select: none;
+        }
+    }
+}

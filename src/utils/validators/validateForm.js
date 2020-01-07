@@ -1,4 +1,6 @@
-export default function validateForm(inputs, inputRules, crossInputRules) {
+export default function validateForm(inputs, inputRules, crossInputRules = []) {
+    let isValid = true;
+
     Object.keys(inputs).forEach(name => {
         const input = inputs[name];
 
@@ -15,10 +17,12 @@ export default function validateForm(inputs, inputRules, crossInputRules) {
         const rules = [...inputRules[name], ...crossInputRules[name]];
 
         let rule;
-        for (rule of rules) {
-            if (!input.validate(rule)) return false;
-        }
-
-        return true;
+        for (rule of rules)
+            if (!input.validate(rule)) {
+                isValid = false;
+                break;
+            }
     });
+
+    return isValid;
 }

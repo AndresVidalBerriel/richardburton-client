@@ -1,31 +1,37 @@
 import React from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import { history } from "store";
 
+import Header from "components/Header";
 import SideBar from "components/Sidebar";
 import SignUp from "components/SignUp";
-import SignIn from "components/SignIn";
+import UserProfile from "components/UserProfile";
 
 import "./style.less";
 
-export default () => (
-    <>
-        <header>
-            <h1>Richard Burton</h1>
-        </header>
-        <section>
-            <BrowserRouter>
-                <SideBar />
-                <main>
-                    <Switch>
-                        <Route exact path="/">
-                            Browse!
-                        </Route>
-                        <Route path="/sign-up">
-                            <SignUp />
-                        </Route>
-                    </Switch>
-                </main>
-            </BrowserRouter>
-        </section>
-    </>
-);
+export default function App() {
+    return (
+        <>
+            <Header />
+            <section>
+                <ConnectedRouter history={history}>
+                    <SideBar />
+                    <main>
+                        <Switch>
+                            <Route exact path="/">
+                                Browse!
+                            </Route>
+                            <Route path="/sign-up">
+                                <SignUp />
+                            </Route>
+                            <Route path="/profile/:email?">
+                                <UserProfile />
+                            </Route>
+                        </Switch>
+                    </main>
+                </ConnectedRouter>
+            </section>
+        </>
+    );
+}

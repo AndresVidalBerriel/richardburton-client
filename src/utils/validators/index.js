@@ -1,19 +1,21 @@
 export function checkNotEmpty(string) {
-    return string.length !== 0;
+    return string.trim().length !== 0;
 }
 
 export function checkEmailFormat(email) {
-    return /^[\w-\+]+(\.[\w]+)*@[\w-]+(\.[\w]+)*(\.[a-z]{2,})$/.test(email);
+    return /^[\w-\+]+(\.[\w]+)*@[\w-]+(\.[\w]+)*(\.[a-z]{2,})$/.test(
+        email.trim()
+    );
 }
 
 export function checkPasswordFormat(password) {
-    return password.length > 8;
+    return password.trim().length >= 8;
 }
 
-export function checkMatchingPasswords(password, confirmation) {
-    return password === confirmation;
+export function checkMatchingPasswords(confirmation, password) {
+    return password.trim() === confirmation.trim();
 }
 
 export function checkFullNameFormat(name) {
-    return /^[a-z\.]+ [a-z]+/i.test(name);
+    return name.trim().indexOf(" ") !== -1;
 }

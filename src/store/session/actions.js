@@ -18,3 +18,7 @@ export const setSessionError = error => ({
     type: actionTypes.SET_SESSION_ERROR,
     payload: { error }
 });
+
+export const clearSession = () => ({
+    type: actionTypes.CLEAR_SESSION
+});

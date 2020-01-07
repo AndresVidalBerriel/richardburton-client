@@ -12,6 +12,11 @@ export default function useInput(initialState) {
         setValidator(isValid ? onSuccess : onFailure);
         return isValid;
     };
-
-    return { value, setValue, validator, setValidator, validate };
+    return {
+        value,
+        setValue,
+        validator,
+        setValidator,
+        validate
+    };
 }

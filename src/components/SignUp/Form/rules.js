@@ -1,20 +1,11 @@
+import { globalRules } from "utils/validators/rules";
+
 import {
-    checkNotEmpty,
     checkEmailFormat,
     checkPasswordFormat,
     checkMatchingPasswords,
     checkFullNameFormat
 } from "utils/validators";
-
-const globalRules = {
-    required: {
-        checker: checkNotEmpty,
-        onFailure: {
-            status: "error",
-            feedback: "This field is required."
-        }
-    }
-};
 
 export const inputRules = {
     email: [

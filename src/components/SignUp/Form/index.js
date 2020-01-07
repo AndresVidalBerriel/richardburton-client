@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { Button } from "antd";
 
@@ -6,11 +8,16 @@ import FormInput from "components/utils/FormInput";
 
 import { useInput } from "utils/hooks";
 import validateForm from "utils/validators/validateForm";
-import * as validatorRules from "components/SignUp/Form/validatorRules";
+import * as validatorRules from "components/SignUp/Form/rules";
 
 import "./style.less";
 
+import { signUp, setUserCreationError } from "store/users/actions";
+import { removeWhitespaceExcess, getHash } from "utils/strings";
+
 export default function SignUpForm() {
+    const dispatch = useDispatch();
+
     const inputs = {
         email: useInput(""),
         password: useInput(""),
@@ -21,13 +28,48 @@ export default function SignUpForm() {
         occupation: useInput("")
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        dispatch(setUserCreationError(undefined));
+
+        Object.keys(inputs).forEach(name => {
+            const input = inputs[name];
+            input.value = removeWhitespaceExcess(input.value);
+            input.setValue(input.value);
+        });
+
         const { inputRules, crossInputRules } = validatorRules;
-        validateForm(inputs, inputRules, crossInputRules);
+        const isValid = validateForm(inputs, inputRules, crossInputRules);
+
+        if (isValid) {
+            const data = {};
+            Object.keys(inputs).forEach(name => {
+                const input = inputs[name];
+
+                if (name === "name") {
+                    const idx = input.value.indexOf(" ");
+                    data.firstName = input.value.substring(0, idx);
+                    data.lastName = input.value.substring(idx + 1);
+                } else if (name === "password") {
+                    data.authenticationString = getHash(input.value);
+                } else if (name !== "repeatPassword" && input.value) {
+                    data[name] = input.value;
+                }
+            });
+
+            dispatch(signUp(data));
+        }
     };
 
-    return (
-        <form id="sign-up-form">
+    const user = useSelector(state => state.session.user);
+
+    const creationError = useSelector(state => state.users.creation.error);
+
+    return user !== undefined ? (
+        <Redirect to="/profile" />
+    ) : (
+        <form id="sign-up-form" onSubmit={handleSubmit} noValidate>
             <FormInput
                 form="sign-up-form"
                 name="email"
@@ -76,8 +118,10 @@ export default function SignUpForm() {
                 label="Occupation"
                 {...inputs.occupation}
             />
-
-            <Button onClick={handleSubmit}>Submit</Button>
+            <footer>
+                <span className="error">{creationError}</span>
+                <Button htmlType="submit">Submit</Button>
+            </footer>
         </form>
     );
 }

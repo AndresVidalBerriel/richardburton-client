@@ -5,8 +5,9 @@ import { Link, withRouter } from "react-router-dom";
 import "./style.less";
 import SignIn from "components/SignIn";
 import { resetSessionState } from "store/session/actions";
+import * as routes from "routes";
 
-const Item = withRouter(({ icon, text, url, location, params, onClick }) => {
+const Item = withRouter(({ icon, text, url, location, onClick }) => {
     const selected = location.pathname === url ? "selected" : "";
     const className = `nav-item ${selected}`;
 
@@ -20,7 +21,7 @@ const Item = withRouter(({ icon, text, url, location, params, onClick }) => {
     );
 
     return url ? (
-        <Link to={{ pathname: url, state: params }} className={className}>
+        <Link to={url} className={className}>
             {content}
         </Link>
     ) : (
@@ -37,18 +38,27 @@ export default function SideBar() {
 
     return (
         <>
-            <nav>
-                <Item url="/" icon="menu_book" text="Browse" />
-                <Item url="/books" icon="book" text="Book management" />
+            <nav className="sidebar">
+                <Item url={routes.HOME} icon="menu_book" text="Browse" />
+                {loggedUser && (
+                    <Item
+                        url={routes.BOOK_MANAGEMENT}
+                        icon="book"
+                        text="Book management"
+                    />
+                )}
                 {!loggedUser && (
-                    <Item url="/sign-up" icon="account_circle" text="Sign Up" />
+                    <Item
+                        url={routes.SIGN_UP}
+                        icon="account_circle"
+                        text="Sign Up"
+                    />
                 )}
                 {loggedUser && (
                     <Item
-                        url="/profile"
+                        url={routes.USER_PROFILE_BASE}
                         icon="account_circle"
                         text="Profile"
-                        params={{ email: loggedUser.email }}
                     />
                 )}
                 {!loggedUser && (

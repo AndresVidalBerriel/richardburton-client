@@ -8,6 +8,8 @@ import "./style.less";
 
 import LoadingView from "components/LoadingView";
 
+import * as routes from "routes";
+
 export default withRouter(function UserProfile({ history, match }) {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
@@ -20,11 +22,11 @@ export default withRouter(function UserProfile({ history, match }) {
         let { id } = match.params;
         if (!id) {
             if (loggedUser) id = loggedUser.id;
-            else history.push("/");
+            else history.push(routes.HOME);
         }
 
         dispatch(retrieveUser(id));
-    }, []);
+    }, [loggedUser]);
 
     return !user && loading ? (
         <LoadingView />
@@ -34,7 +36,7 @@ export default withRouter(function UserProfile({ history, match }) {
         <div className="user-profile">
             <header>
                 <h2>
-                    Profile of <strong>{user.firstName}</strong>
+                    <strong>{`${user.firstName} ${user.lastName}`}</strong>
                 </h2>
             </header>
         </div>

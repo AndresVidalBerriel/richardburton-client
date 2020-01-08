@@ -7,11 +7,16 @@ import Header from "components/Header";
 import SideBar from "components/Sidebar";
 import SignUp from "components/SignUp";
 import UserProfile from "components/UserProfile";
+import * as routes from "routes";
 
 import "./style.less";
+import { useSelector } from "react-redux";
+import LoadingView from "components/LoadingView/index";
 
 export default function App() {
-    return (
+    const storeReady = useSelector(state => state.root.storeReady);
+
+    return storeReady ? (
         <>
             <Header />
             <section>
@@ -19,13 +24,13 @@ export default function App() {
                     <SideBar />
                     <main>
                         <Switch>
-                            <Route exact path="/">
+                            <Route exact path={routes.HOME}>
                                 Browse!
                             </Route>
-                            <Route path="/sign-up">
+                            <Route path={routes.SIGN_UP}>
                                 <SignUp />
                             </Route>
-                            <Route path="/profile/:id?">
+                            <Route path={routes.USER_PROFILE}>
                                 <UserProfile />
                             </Route>
                         </Switch>
@@ -33,5 +38,7 @@ export default function App() {
                 </ConnectedRouter>
             </section>
         </>
+    ) : (
+        <LoadingView />
     );
 }

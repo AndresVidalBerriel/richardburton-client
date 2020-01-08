@@ -15,6 +15,8 @@ import "./style.less";
 import { signUp, resetUserCreationState } from "store/users/actions";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
+import * as routes from "routes";
+
 export default withRouter(function SignUpForm({ location }) {
     const dispatch = useDispatch();
 
@@ -71,7 +73,7 @@ export default withRouter(function SignUpForm({ location }) {
     const error = useSelector(state => state.users.creation.error);
 
     return user !== undefined ? (
-        <Redirect to="/profile" />
+        <Redirect to={routes.USER_PROFILE_BASE} />
     ) : (
         <form id="sign-up-form" onSubmit={handleSubmit} noValidate>
             <FormInput

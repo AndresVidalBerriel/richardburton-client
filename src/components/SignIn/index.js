@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { Modal, Button } from "antd";
 
@@ -14,14 +15,14 @@ import { inputRules } from "components/SignIn/rules";
 import "./style.less";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
-export default function SignIn({ visible, setVisible }) {
+export default withRouter(function SignIn({ visible, setVisible, location }) {
     const dispatch = useDispatch();
 
     const { loading, error, user } = useSelector(state => state.session);
 
     useEffect(() => {
-        if (user !== undefined) setVisible(false);
-    });
+        setVisible(false);
+    }, [location.pathname]);
 
     const inputs = {
         email: useInput(""),
@@ -76,7 +77,7 @@ export default function SignIn({ visible, setVisible }) {
         <Modal
             className="sign-in-modal"
             title={modalHeader}
-            visible={visible}
+            visible={!user && visible}
             confirmLoading={loading}
             onCancel={closeModal}
             footer={modalFooter}
@@ -100,4 +101,4 @@ export default function SignIn({ visible, setVisible }) {
             </form>
         </Modal>
     );
-}
+});

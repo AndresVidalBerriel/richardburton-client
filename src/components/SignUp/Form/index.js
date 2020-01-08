@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 
 import { Button } from "antd";
 
@@ -12,11 +12,15 @@ import * as validatorRules from "components/SignUp/Form/rules";
 
 import "./style.less";
 
-import { signUp, setUserCreationError } from "store/users/actions";
+import { signUp, resetUserCreationState } from "store/users/actions";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
-export default function SignUpForm() {
+export default withRouter(function SignUpForm({ location }) {
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(resetUserCreationState());
+    }, [location.pathname]);
 
     const inputs = {
         email: useInput(""),
@@ -31,7 +35,7 @@ export default function SignUpForm() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        dispatch(setUserCreationError(undefined));
+        dispatch(resetUserCreationState());
 
         Object.keys(inputs).forEach(name => {
             const input = inputs[name];
@@ -64,7 +68,7 @@ export default function SignUpForm() {
 
     const user = useSelector(state => state.session.user);
 
-    const creationError = useSelector(state => state.users.creation.error);
+    const error = useSelector(state => state.users.creation.error);
 
     return user !== undefined ? (
         <Redirect to="/profile" />
@@ -119,9 +123,9 @@ export default function SignUpForm() {
                 {...inputs.occupation}
             />
             <footer>
-                <span className="error">{creationError}</span>
+                <span className="error">{error && error.message}</span>
                 <Button htmlType="submit">Submit</Button>
             </footer>
         </form>
     );
-}
+});

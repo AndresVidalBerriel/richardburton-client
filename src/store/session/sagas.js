@@ -21,15 +21,13 @@ function* signIn(action) {
 
         yield put(actions.setSessionSuccess(user));
     } catch (error) {
-        let sessionError = error.message;
-
         switch (error.response.status) {
             case UNAUTHORIZED: {
-                sessionError = "Incorrect email or password.";
+                error.message = "Incorrect email or password.";
             }
         }
 
-        yield put(actions.setSessionError(sessionError));
+        yield put(actions.setSessionError(error));
     }
 }
 

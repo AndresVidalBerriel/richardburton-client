@@ -17,6 +17,7 @@ export default function UserReducer(state = initialState, action) {
             };
             return { ...initialState, creation };
         }
+
         case actionTypes.SET_CREATION_SUCCESS: {
             const creation = {
                 ...state.creation,
@@ -25,11 +26,18 @@ export default function UserReducer(state = initialState, action) {
             };
             return { ...state, creation };
         }
+
         case actionTypes.SET_CREATION_ERROR: {
             const { error } = payload;
             const creation = { ...state.creation, loading: false, error };
             return { ...state, creation };
         }
+
+        case actionTypes.RESET_CREATION_STATE: {
+            const creation = { ...initialState.creation };
+            return { ...state, creation };
+        }
+
         case actionTypes.SET_RETRIEVAL_LOADING: {
             const retrieval = {
                 ...state.retrieval,
@@ -38,6 +46,7 @@ export default function UserReducer(state = initialState, action) {
             };
             return { ...initialState, retrieval };
         }
+
         case actionTypes.SET_RETRIEVAL_SUCCESS: {
             const { user } = payload;
             const retrieval = {
@@ -48,9 +57,15 @@ export default function UserReducer(state = initialState, action) {
             };
             return { ...state, retrieval };
         }
+
         case actionTypes.SET_RETRIEVAL_ERROR: {
             const { error } = payload;
             const retrieval = { ...state.retrieval, loading: false, error };
+            return { ...state, retrieval };
+        }
+
+        case actionTypes.RESET_RETRIEVAL_STATE: {
+            const retrieval = { ...initialState.retrieval };
             return { ...state, retrieval };
         }
 

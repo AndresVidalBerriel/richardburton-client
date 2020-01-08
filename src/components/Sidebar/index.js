@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import "./style.less";
 import SignIn from "components/SignIn";
-import { clearSession } from "store/session/actions";
+import { resetSessionState } from "store/session/actions";
 
 const Item = withRouter(({ icon, text, url, location, params, onClick }) => {
     const selected = location.pathname === url ? "selected" : "";
@@ -62,7 +62,7 @@ export default function SideBar() {
                     <Item
                         icon="lock_outline"
                         text="Sign Out"
-                        onClick={() => dispatch(clearSession())}
+                        onClick={() => dispatch(resetSessionState())}
                     />
                 )}
             </nav>

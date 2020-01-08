@@ -15,15 +15,13 @@ function* signUp(action) {
         yield put(actions.setUserCreationSuccess());
         yield put(signIn(user.email, user.authenticationString));
     } catch (error) {
-        let creationError = error.message;
-
         switch (error.response.status) {
             case CONFLICT: {
-                creationError = "Email already registered.";
+                error.message = "Email already registered.";
             }
         }
 
-        yield put(actions.setUserCreationError(creationError));
+        yield put(actions.setUserCreationError(error));
     }
 }
 
@@ -33,12 +31,13 @@ function* watchSignUpRequest() {
 
 function* retrieveUser(action) {
     const { id } = action.payload;
+
     try {
         yield put(actions.setUserRetrievalLoading());
         const response = yield UserController.retrieveUser(id);
         yield put(actions.setUserRetrievalSuccess(response.data));
     } catch (error) {
-        yield put(actions.setUserRetrievalError(error.message));
+        yield put(actions.setUserRetrievalError(error));
     }
 }
 

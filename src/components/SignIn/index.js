@@ -6,7 +6,7 @@ import { Modal, Button } from "antd";
 import FormInput from "components/utils/FormInput";
 import { useInput } from "utils/hooks";
 
-import { signIn, setSessionError } from "store/session/actions";
+import { signIn, resetSessionState } from "store/session/actions";
 
 import validateForm from "utils/validators/validateForm";
 import { inputRules } from "components/SignIn/rules";
@@ -16,12 +16,11 @@ import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 export default function SignIn({ visible, setVisible }) {
     const dispatch = useDispatch();
-    const sessionLoading = useSelector(state => state.session.loading);
-    const sessionError = useSelector(state => state.session.error);
-    const loggedUser = useSelector(state => state.session.user);
+
+    const { loading, error, user } = useSelector(state => state.session);
 
     useEffect(() => {
-        if (loggedUser !== undefined) setVisible(false);
+        if (user !== undefined) setVisible(false);
     });
 
     const inputs = {
@@ -31,13 +30,14 @@ export default function SignIn({ visible, setVisible }) {
 
     const closeModal = () => {
         Object.keys(inputs).forEach(name => inputs[name].setValue(""));
+        dispatch(resetSessionState());
         setVisible(false);
     };
 
     const handleSubmit = e => {
         e.preventDefault();
 
-        dispatch(setSessionError(undefined));
+        dispatch(resetSessionState());
 
         Object.keys(inputs).forEach(name => {
             const input = inputs[name];
@@ -64,7 +64,7 @@ export default function SignIn({ visible, setVisible }) {
 
     const modalFooter = (
         <>
-            <span className="error">{sessionError}</span>
+            <span className="error">{error && error.message}</span>
 
             <Button htmlType="submit" type="primary" form="sign-in-form">
                 Sign in
@@ -77,7 +77,7 @@ export default function SignIn({ visible, setVisible }) {
             className="sign-in-modal"
             title={modalHeader}
             visible={visible}
-            confirmLoading={sessionLoading}
+            confirmLoading={loading}
             onCancel={closeModal}
             footer={modalFooter}
         >

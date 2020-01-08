@@ -18,6 +18,10 @@ export const setUserCreationError = error => ({
     payload: { error }
 });
 
+export const resetUserCreationState = () => ({
+    type: actionTypes.RESET_CREATION_STATE
+});
+
 export const retrieveUser = id => ({
     type: actionTypes.RETRIEVE_USER_REQUEST,
     payload: { id }
@@ -35,4 +39,8 @@ export const setUserRetrievalSuccess = user => ({
 export const setUserRetrievalError = error => ({
     type: actionTypes.SET_RETRIEVAL_ERROR,
     payload: { error }
+});
+
+export const resetUserRetrievalState = () => ({
+    type: actionTypes.RESET_RETRIEVAL_STATE
 });

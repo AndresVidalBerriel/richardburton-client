@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import { retrieveUser } from "store/users/actions";
 
@@ -8,28 +8,35 @@ import "./style.less";
 
 import LoadingView from "components/LoadingView";
 
-export default withRouter(function UserProfile({ history, location, match }) {
+export default withRouter(function UserProfile({ history, match }) {
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.session.user);
-    const selectedUser = useSelector(state => state.users.retrieval.user);
+
+    const { loading, error, user } = useSelector(
+        state => state.users.retrieval
+    );
 
     useEffect(() => {
-        if (!selectedUser) {
-            let { id } = match.params;
-            if (!id && loggedUser) id = loggedUser.id;
-            if (id) dispatch(retrieveUser(id));
+        let { id } = match.params;
+        if (!id) {
+            if (loggedUser) id = loggedUser.id;
+            else history.push("/");
         }
-    }, [selectedUser, loggedUser, dispatch]);
 
-    return selectedUser ? (
+        dispatch(retrieveUser(id));
+    }, []);
+
+    return !user && loading ? (
+        <LoadingView />
+    ) : error ? (
+        <div>Error :(</div>
+    ) : user ? (
         <div className="user-profile">
             <header>
                 <h2>
-                    Profile of <strong>{selectedUser.firstName}</strong>
+                    Profile of <strong>{user.firstName}</strong>
                 </h2>
             </header>
         </div>
-    ) : (
-        <LoadingView />
-    );
+    ) : null;
 });

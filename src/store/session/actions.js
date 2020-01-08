@@ -19,6 +19,6 @@ export const setSessionError = error => ({
     payload: { error }
 });
 
-export const clearSession = () => ({
-    type: actionTypes.CLEAR_SESSION
+export const resetSessionState = () => ({
+    type: actionTypes.RESET_SESSION_STATE
 });

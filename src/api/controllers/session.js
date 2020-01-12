@@ -3,7 +3,7 @@ import { sessionEndpoints as endpoints } from "api/endpoints";
 
 export default class SessionController {
     static signIn(email, authenticationString) {
-        const { method, url } = endpoints.signIn;
+        const { method, url } = endpoints.signIn();
 
         return api[method](url, undefined, {
             auth: {

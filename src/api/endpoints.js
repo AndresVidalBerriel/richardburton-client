@@ -1,18 +1,30 @@
 export const sessionEndpoints = {
-    signIn: {
+    signIn: () => ({
         method: "post",
         url: "/session"
-    }
+    })
 };
 
 export const userEndpoints = {
-    signUp: {
+    signUp: () => ({
         method: "post",
         url: "/users"
-    },
+    }),
 
-    retrieveUser: {
+    retrieveUser: id => ({
         method: "get",
-        url: "/users/{email}"
-    }
+        url: `/users/${id}`
+    })
+};
+
+export const translationEndpoints = {
+    retrieveTranslations: afterId => ({
+        method: "get",
+        url: `/translations?after-id=${afterId}`
+    }),
+
+    retrieveTranslation: id => ({
+        method: "get",
+        url: `/translations/${id}`
+    })
 };

@@ -1,0 +1,54 @@
+@import "../../theme.less";
+
+.book-browser {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+
+    overflow: hidden;
+
+    header {
+        margin-bottom: 30px;
+    }
+
+    .book-browser-content {
+        display: flex;
+        flex: 1;
+        overflow: auto;
+
+        margin-bottom: 20px;
+
+        table {
+            flex: 1;
+            table-layout: fixed;
+            width: 100%;
+
+            td,
+            th {
+                width: 250px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding: 7px;
+            }
+
+            th {
+                padding-bottom: 20px;
+            }
+
+            tbody {
+                tr {
+                    &:hover {
+                        background-color: @color-grey-hover;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        margin-top: auto;
+        align-self: flex-end;
+    }
+}

@@ -5,10 +5,11 @@ import { persistConfig } from "store/persist";
 import { connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 
+import * as actionTypes from "store/root/action-types";
+
 import SessionReducer from "store/session/reducer";
 import UserReducer from "store/users/reducer";
-
-import * as actionTypes from "store/root/action-types";
+import TranslationReducer from "store/translations/reducer";
 
 const initialState = {
     storeReady: false
@@ -34,7 +35,8 @@ const rootReducer = combineReducers({
     root: RootReducer,
     router: connectRouter(history),
     session: SessionReducer,
-    users: UserReducer
+    users: UserReducer,
+    translations: TranslationReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

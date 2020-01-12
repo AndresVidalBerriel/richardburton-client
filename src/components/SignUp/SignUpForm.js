@@ -8,7 +8,7 @@ import FormInput from "components/utils/FormInput";
 
 import { useInput } from "utils/hooks";
 import validateForm from "utils/validators/validateForm";
-import * as validatorRules from "components/SignUp/Form/rules";
+import * as validatorRules from "components/SignUp/rules";
 
 import "./style.less";
 

@@ -5,16 +5,44 @@
     flex-direction: column;
     height: 100%;
 
+    > header {
+        display: flex;
+
+        background-color: @color-primary-dark;
+        box-shadow: @shadow-header;
+        padding: 7px 20px;
+
+        h1 {
+            color: @text-white;
+            font-weight: normal;
+            font-size: x-large;
+            margin: 0;
+
+            text-align: center;
+            margin-left: 15px;
+        }
+
+        .user-info {
+            align-self: center;
+            margin-left: auto;
+            color: @text-white;
+            font-size: medium;
+        }
+    }
+
     > section {
         display: flex;
-        flex: 1;
+        height: 100%;
 
         > main {
             display: flex;
             flex: 1;
+            height: calc(100% - 50px);
 
             box-shadow: @shadow-card;
             margin: 20px;
+
+            overflow: auto;
         }
     }
 }

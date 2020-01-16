@@ -1,0 +1,83 @@
+{
+    "translation": {
+        "submit": "Enviar",
+        "loading": "Carregando",
+        "search": "Pesquisar"
+    },
+
+    "error": {
+        "requiredField": "Este campo deve ser completado",
+        "emailFormat": "O formato do email inserido é incorreto",
+        "passwordFormat": "O formato da senha inserido é incorreto",
+        "fullNameFormat": "Por favor, insira seu nome e sobrenome",
+        "matchingPasswords": "As senhas inseridas não coincidem",
+        "emailAlreadyRegistered": "Esse email já está cadastrado",
+        "incorrectEmailOrPassword": "Email ou senha incorrentos"
+    },
+
+    "user": {
+        "email": "Email",
+        "fullName": "Nome completo",
+        "password": "Senha",
+        "repeatPassword": "Repetir senha",
+        "nationality": "Nacionalidade",
+        "affiliation": "Afiliação",
+        "occupation": "Ocupação"
+    },
+
+    "book": {
+        "translator": "Tradutor",
+        "translator_plural": "Tradutores",
+        "title": "Título",
+        "author": "Autor",
+        "author_plural": "Authors",
+        "originalTitle": "Título original",
+        "original": "Original",
+
+        "publications.title": "$t(book:title)",
+        "authors.name": "$t(book:translator)",
+        "original.publications.title": "$t(book:originalTitle)",
+        "original.authors.name": "$t(book:author)"
+    },
+
+    "search": {
+        "newRule": "Nova regra",
+        "addRule": "Adicionar regra",
+        "noRules": "Nenhuma regra definida",
+        "buildQuery": "Construir consulta",
+        "getResults": "Ver resultados",
+        "noResults": "Sem resultados",
+
+        "connectorSelector": {
+            "pre": "Pesquisar livros que cumpram",
+            "post": "das regras definidas",
+            "all": "todas",
+            "any": "alguma"
+        },
+
+        "operators": {
+            "is": "é",
+            "above": "acima de",
+            "below": "abaixo de"
+        }
+    },
+
+    "sidebar": {
+        "browse": "Pesquisar",
+        "advancedSearch": "Busca avançada",
+        "signUp": "Cadastre-se",
+        "signIn": "Fazer login",
+        "signOut": "Fazer logout",
+        "bookManagement": "Gerenciar livros",
+        "profile": "Perfil"
+    },
+
+    "signUp": {
+        "title": "Participe da <1>Plataforma Richard Burton!</1>"
+    },
+
+    "signIn": {
+        "title": "Entre na <1>Plataforma Richard Burton!</1>",
+        "submit": "Login"
+    }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { Button } from "antd";
 
@@ -16,13 +16,13 @@ import { signUp, resetUserCreationState } from "store/users/actions";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 import * as routes from "routes";
+import { useTranslation } from "react-i18next";
 
-export default withRouter(function SignUpForm({ location }) {
+export default function SignUpForm() {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(resetUserCreationState());
-    }, [location.pathname]);
+    useEffect(() => () => dispatch(resetUserCreationState()), []);
 
     const inputs = {
         email: useInput(""),
@@ -79,21 +79,21 @@ export default withRouter(function SignUpForm({ location }) {
             <FormInput
                 form="sign-up-form"
                 name="email"
-                label="Email"
+                label={t("user:email")}
                 {...inputs.email}
                 required
             />
             <FormInput
                 form="sign-up-form"
                 name="name"
-                label="Full name"
+                label={t("user:fullName")}
                 {...inputs.name}
                 required
             />
             <FormInput
                 form="sign-up-form"
                 name="password"
-                label="Password"
+                label={t("user:password")}
                 type="password"
                 {...inputs.password}
                 required
@@ -101,7 +101,7 @@ export default withRouter(function SignUpForm({ location }) {
             <FormInput
                 form="sign-up-form"
                 name="repeatPassword"
-                label="Repeat password"
+                label={t("user:repeatPassword")}
                 type="password"
                 {...inputs.repeatPassword}
                 required
@@ -109,25 +109,25 @@ export default withRouter(function SignUpForm({ location }) {
             <FormInput
                 form="sign-up-form"
                 name="nationality"
-                label="Nationality"
+                label={t("user:nationality")}
                 {...inputs.nationality}
             />
             <FormInput
                 form="sign-up-form"
                 name="affiliation"
-                label="Affiliation"
+                label={t("user:affiliation")}
                 {...inputs.affiliation}
             />
             <FormInput
                 form="sign-up-form"
                 name="occupation"
-                label="Occupation"
+                label={t("user:occupation")}
                 {...inputs.occupation}
             />
             <footer>
-                <span className="error">{error && error.message}</span>
-                <Button htmlType="submit">Submit</Button>
+                <span className="error">{error && t(error.message)}</span>
+                <Button htmlType="submit">{t("submit")}</Button>
             </footer>
         </form>
     );
-});
+}

@@ -1,0 +1,83 @@
+{
+    "translation": {
+        "submit": "Submit",
+        "loading": "Loading",
+        "search": "Search"
+    },
+
+    "error": {
+        "requiredField": "This field is required",
+        "emailFormat": "The provided email's format is incorrect",
+        "passwordFormat": "The provided password's format is incorrect",
+        "fullNameFormat": "Please provide first and last names",
+        "matchingPasswords": "The provided passwords do not match",
+        "emailAlreadyRegistered": "Email already registered",
+        "incorrectEmailOrPassword": "Incorrect email or password"
+    },
+
+    "user": {
+        "email": "Email",
+        "fullName": "Full name",
+        "password": "Password",
+        "repeatPassword": "Repeat password",
+        "nationality": "Nationality",
+        "affiliation": "Affiliation",
+        "occupation": "Occupation"
+    },
+
+    "book": {
+        "translator": "Translator",
+        "translator_plural": "Translators",
+        "title": "Title",
+        "author": "Author",
+        "author_plural": "Authors",
+        "originalTitle": "Original title",
+        "original": "Original",
+
+        "publications.title": "$t(book:title)",
+        "authors.name": "$t(book:translator)",
+        "original.publications.title": "$t(book:originalTitle)",
+        "original.authors.name": "$t(book:author)"
+    },
+
+    "search": {
+        "newRule": "New rule",
+        "addRule": "Add rule",
+        "noRules": "No rules defined",
+        "buildQuery": "Build query",
+        "getResults": "Get results",
+        "noResults": "No results",
+
+        "connectorSelector": {
+            "pre": "Match",
+            "post": "of these rules",
+            "all": "all",
+            "any": "any"
+        },
+
+        "operators": {
+            "is": "is",
+            "above": "above",
+            "below": "below"
+        }
+    },
+
+    "sidebar": {
+        "browse": "Browse",
+        "advancedSearch": "Advanced Search",
+        "signUp": "Sign Up",
+        "signIn": "Sign In",
+        "signOut": "Sign Out",
+        "bookManagement": "Book Management",
+        "profile": "Profile"
+    },
+
+    "signUp": {
+        "title": "Sign up to the <1>Richard Burton Platform!</1>"
+    },
+
+    "signIn": {
+        "title": "Sign in to the <1>Richard Burton Platform!</1>",
+        "submit": "Sign in"
+    }
+}

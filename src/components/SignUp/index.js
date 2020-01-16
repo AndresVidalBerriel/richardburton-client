@@ -5,6 +5,7 @@ import SignUpForm from "components/SignUp/SignUpForm";
 
 import "./style.less";
 import LoadingView from "components/LoadingView";
+import { Trans } from "react-i18next";
 
 export default function SignUp() {
     const { loading } = useSelector(state => state.session);
@@ -15,7 +16,9 @@ export default function SignUp() {
         <div className="sign-up">
             <header>
                 <h2>
-                    Sign up to the <strong>Richard Burton Platform!</strong>
+                    <Trans i18nKey="signUp:title">
+                        Sign Up title <strong>Richard Burton Platform</strong>
+                    </Trans>
                 </h2>
             </header>
             <SignUpForm />

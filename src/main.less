@@ -23,6 +23,10 @@ body {
 
 .error {
     color: @color-danger;
+
+    &:not(:empty):after {
+        content: ".";
+    }
 }
 
 .ant-modal-header {

@@ -19,6 +19,11 @@
 
         margin-bottom: 20px;
 
+        > div {
+            margin: auto;
+            color: @text-secondary;
+        }
+
         table {
             flex: 1;
             table-layout: fixed;
@@ -49,6 +54,16 @@
 
     footer {
         margin-top: auto;
-        align-self: flex-end;
+        align-self: center;
+
+        .page-button {
+            width: 40px;
+            padding: 0;
+
+            &:disabled {
+                cursor: default;
+                color: @text-secondary;
+            }
+        }
     }
 }

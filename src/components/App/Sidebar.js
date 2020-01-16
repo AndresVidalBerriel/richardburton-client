@@ -6,6 +6,7 @@ import "./style.less";
 import SignIn from "components/SignIn";
 import { resetSessionState } from "store/session/actions";
 import * as routes from "routes";
+import { useTranslation } from "react-i18next";
 
 const Item = withRouter(({ icon, text, url, location, onClick }) => {
     const selected = location.pathname === url ? "selected" : "";
@@ -36,42 +37,53 @@ export default function SideBar() {
     const loggedUser = useSelector(state => state.session.user);
     const [signInVisible, setSignInVisible] = useState(false);
 
+    const { t } = useTranslation();
+
     return (
         <>
             <nav className="sidebar">
-                <Item url={routes.HOME} icon="menu_book" text="Browse" />
+                <Item
+                    url={routes.HOME}
+                    icon="menu_book"
+                    text={t("sidebar:browse")}
+                />
+                <Item
+                    url={routes.ADVANCED_SEARCH}
+                    icon="search"
+                    text={t("sidebar:advancedSearch")}
+                />
                 {loggedUser && (
                     <Item
                         url={routes.BOOK_MANAGEMENT}
                         icon="book"
-                        text="Book management"
+                        text={t("sidebar:bookManagement")}
                     />
                 )}
                 {!loggedUser && (
                     <Item
                         url={routes.SIGN_UP}
                         icon="account_circle"
-                        text="Sign Up"
+                        text={t("sidebar:signUp")}
                     />
                 )}
                 {loggedUser && (
                     <Item
                         url={routes.USER_PROFILE_BASE}
                         icon="account_circle"
-                        text="Profile"
+                        text={t("sidebar:Profile")}
                     />
                 )}
                 {!loggedUser && (
                     <Item
                         icon="lock_open"
-                        text="Sign In"
+                        text={t("sidebar:signIn")}
                         onClick={() => setSignInVisible(true)}
                     />
                 )}
                 {loggedUser && (
                     <Item
                         icon="lock_outline"
-                        text="Sign Out"
+                        text={t("sidebar:signOut")}
                         onClick={() => dispatch(resetSessionState())}
                     />
                 )}

@@ -17,7 +17,7 @@ function* signUp(action) {
     } catch (error) {
         switch (error.response.status) {
             case CONFLICT: {
-                error.message = "Email already registered.";
+                error.message = "error:emailAlreadyRegistered";
             }
         }
 

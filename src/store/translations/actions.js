@@ -17,9 +17,9 @@ export const resetTranslationCreationState = () => ({
     type: actionTypes.RESET_CREATION_STATE
 });
 
-export const retrieveTranslations = afterId => ({
+export const retrieveTranslations = (afterId, pageSize, searchFor) => ({
     type: actionTypes.RETRIEVE_TRANSLATIONS_REQUEST,
-    payload: { afterId }
+    payload: { afterId, pageSize, searchFor }
 });
 
 export const retrieveTranslation = id => ({

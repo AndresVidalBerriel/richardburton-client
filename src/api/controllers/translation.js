@@ -2,8 +2,12 @@ import api from "api/axios";
 import { translationEndpoints as endpoints } from "api/endpoints";
 
 export default class TranslatedBookController {
-    static retrieveTranslations(afterId) {
-        const { method, url } = endpoints.retrieveTranslations(afterId);
+    static retrieveTranslations(afterId, pageSize, searchFor) {
+        const { method, url } = endpoints.retrieveTranslations(
+            afterId,
+            pageSize,
+            searchFor
+        );
         return api[method](url);
     }
 

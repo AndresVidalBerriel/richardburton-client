@@ -8,7 +8,7 @@ export const inputRules = {
             checker: checkEmailFormat,
             onFailure: {
                 status: "error",
-                feedback: "The provided email's format is incorrect."
+                feedback: "error:emailFormat"
             }
         }
     ],

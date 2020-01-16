@@ -1,0 +1,131 @@
+@import "../../theme.less";
+
+.advanced-search {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    width: 100%;
+
+    header {
+        display: flex;
+        margin-bottom: 30px;
+
+        .steps {
+            .results-step:not(.ant-steps-item-active) {
+                .ant-steps-item-container {
+                    cursor: default !important;
+
+                    &:hover {
+                        .ant-steps-item-icon {
+                            border-color: rgba(0, 0, 0, 0.25) !important;
+
+                            .ant-steps-icon {
+                                color: rgba(0, 0, 0, 0.25) !important;
+                            }
+                        }
+
+                        .ant-steps-item-title {
+                            color: rgba(0, 0, 0, 0.45) !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .query-builder {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .rules {
+            min-height: 68px;
+            border: solid 1px @color-lightgrey;
+
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: auto;
+
+            margin-bottom: auto;
+
+            span {
+                margin: auto;
+                color: @text-secondary;
+            }
+        }
+
+        .new-rule {
+            display: flex;
+            align-items: center;
+
+            margin-bottom: 25px;
+
+            span.text {
+                font-weight: bold;
+                flex: 0 0 auto;
+                margin-right: 20px;
+            }
+
+            form {
+                display: flex;
+                flex: 1;
+
+                > *:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .query-rule {
+            display: flex;
+            align-items: center;
+
+            padding: 20px 10px;
+
+            &:not(:last-child) {
+                border-bottom: solid @color-lightgrey 1px;
+            }
+
+            > *:not(:last-child) {
+                margin-right: 20px;
+            }
+
+            .node {
+                background-color: @color-lightgrey;
+                padding: 3px 10px;
+                border-radius: 17px;
+
+                min-width: 50px;
+                text-align: center;
+
+                font-weight: bold;
+
+                &.operator {
+                    color: @color-accent;
+                }
+            }
+        }
+
+        footer {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+
+            .connector-selector {
+                margin: 0 15px;
+            }
+
+            button {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .book-browser {
+        padding: 0;
+        flex: 1;
+    }
+}

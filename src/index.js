@@ -8,6 +8,7 @@ import { store } from "store";
 
 import "antd/dist/antd.less";
 import "main.less";
+import "translate";
 
 ReactDOM.render(
     <Provider store={store}>

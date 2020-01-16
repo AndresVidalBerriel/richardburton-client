@@ -1,12 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Record({ id, authors, year, publications, original }) {
+import { Tooltip } from "antd";
+
+const Field = ({ value, linkTo }) => {
+    return (
+        <td>
+            <Tooltip title={value}>
+                {linkTo ? (
+                    <Link to={linkTo}>{value}</Link>
+                ) : (
+                    <span>{value}</span>
+                )}
+            </Tooltip>
+        </td>
+    );
+};
+
+export default function Record({ id, authors, publications, original }) {
     return (
         <tr>
-            <td>{publications[0].title}</td>
-            <td>{authors.map(a => a.name).join(" & ")}</td>
-            <td>{original.publications[0].title}</td>
-            <td>{original.authors.map(a => a.name).join(" & ")}</td>
+            <Field value={publications[0].title} />
+            <Field value={authors.map(a => a.name).join(" & ")} />
+            <Field value={original.publications[0].title} />
+            <Field value={original.authors.map(a => a.name).join(" & ")} />
         </tr>
     );
 }

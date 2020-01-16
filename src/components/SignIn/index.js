@@ -4,6 +4,8 @@ import { withRouter } from "react-router-dom";
 
 import { Modal, Button } from "antd";
 
+import { Trans } from "react-i18next";
+
 import FormInput from "components/utils/FormInput";
 import { useInput } from "utils/hooks";
 
@@ -15,7 +17,10 @@ import { inputRules } from "components/SignIn/rules";
 import "./style.less";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
+import { useTranslation } from "react-i18next";
+
 export default withRouter(function SignIn({ visible, setVisible, location }) {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const { loading, error, user } = useSelector(state => state.session);
@@ -58,14 +63,16 @@ export default withRouter(function SignIn({ visible, setVisible, location }) {
         <h2>
             <i className="material-icons">lock_open</i>
             <span>
-                Sign in to de <strong>Richard Burton Platform!</strong>
+                <Trans i18nKey="signIn:title">
+                    Sign In title <strong>Richard Burton Platform</strong>
+                </Trans>
             </span>
         </h2>
     );
 
     const modalFooter = (
         <>
-            <span className="error">{error && error.message}</span>
+            <span className="error">{error && t(error.message)}</span>
 
             <Button htmlType="submit" type="primary" form="sign-in-form">
                 Sign in
@@ -86,14 +93,14 @@ export default withRouter(function SignIn({ visible, setVisible, location }) {
                 <FormInput
                     form="sign-up-form"
                     name="email"
-                    label="Email"
+                    label={t("user:email")}
                     {...inputs.email}
                     required
                 />
                 <FormInput
                     form="sign-up-form"
                     name="password"
-                    label="Password"
+                    label={t("user:password")}
                     type="password"
                     {...inputs.password}
                     required

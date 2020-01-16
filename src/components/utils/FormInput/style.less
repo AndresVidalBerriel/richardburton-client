@@ -1,10 +1,14 @@
 form {
     display: flex;
-    flex-direction: column;
+
+    &:not(.inline) {
+        flex-direction: column;
+    }
 
     .form-input {
         display: flex;
         position: relative;
+        flex: 1;
 
         label {
             align-self: flex-start;
@@ -28,15 +32,24 @@ form {
         .input-wrapper {
             flex: 1;
 
-            footer {
+            .feedback {
                 position: absolute;
-
                 font-size: small;
+
+                &:not(:empty)::after {
+                    content: ".";
+                }
             }
         }
     }
 
     .form-input:not(:last-child) {
         margin-bottom: 30px;
+    }
+
+    &.inline {
+        .form-input {
+            margin-bottom: 0;
+        }
     }
 }

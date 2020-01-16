@@ -16,7 +16,7 @@ export const inputRules = {
             onSuccess: { status: "success" },
             onFailure: {
                 status: "error",
-                feedback: "The provided email's format is incorrect."
+                feedback: "error:emailFormat"
             }
         }
     ],
@@ -28,7 +28,7 @@ export const inputRules = {
             onSuccess: { status: "success" },
             onFailure: {
                 status: "error",
-                feedback: "The provided password's format is incorrect."
+                feedback: "error:passwordFormat"
             }
         }
     ],
@@ -39,7 +39,7 @@ export const inputRules = {
             checker: checkFullNameFormat,
             onFailure: {
                 status: "error",
-                feedback: "Please provide first and last names."
+                feedback: "error:fullNameFormat"
             }
         }
     ]
@@ -53,7 +53,7 @@ export const crossInputRules = {
             onSuccess: { status: "success" },
             onFailure: {
                 status: "error",
-                feedback: "The provided passwords do not match."
+                feedback: "error:matchingPasswords"
             }
         }
     ]

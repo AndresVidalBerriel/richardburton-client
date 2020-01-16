@@ -18,10 +18,20 @@ export const userEndpoints = {
 };
 
 export const translationEndpoints = {
-    retrieveTranslations: afterId => ({
-        method: "get",
-        url: `/translations?after-id=${afterId}`
-    }),
+    retrieveTranslations: (afterId, pageSize, searchFor) => {
+        const queryParams = [];
+
+        if (afterId) queryParams.push(`after-id=${afterId}`);
+        if (pageSize) queryParams.push(`page-size=${pageSize}`);
+        if (searchFor) queryParams.push(`search=${searchFor}`);
+
+        const queryString = queryParams.join("&");
+
+        return {
+            method: "get",
+            url: `/translations?${queryString}`
+        };
+    },
 
     retrieveTranslation: id => ({
         method: "get",

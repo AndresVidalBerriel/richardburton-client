@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useTranslation } from "react-i18next";
+
 import { Input, Icon } from "antd";
 
 import "./style.less";
@@ -64,15 +66,18 @@ export default function FormInput({
     setValue,
     ...input
 }) {
-    const { suffix, feedback } = processValidator(validator);
+    const { t } = useTranslation();
 
+    const { suffix, feedback } = processValidator(validator);
     const { setValidator, validate, ...inputProps } = input;
 
     return (
         <div className="form-input">
-            <label required={required} htmlFor={name} form={form}>
-                {label}
-            </label>
+            {label && (
+                <label required={required} htmlFor={name} form={form}>
+                    {label}
+                </label>
+            )}
             <div className="input-wrapper">
                 <Input
                     required={required}
@@ -81,7 +86,9 @@ export default function FormInput({
                     {...inputProps}
                     onChange={e => setValue(e.target.value)}
                 />
-                <footer style={feedback.style}>{feedback.value}</footer>
+                <div className="feedback" style={feedback.style}>
+                    {t(feedback.value)}
+                </div>
             </div>
         </div>
     );

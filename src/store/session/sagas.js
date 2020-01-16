@@ -23,7 +23,7 @@ function* signIn(action) {
     } catch (error) {
         switch (error.response.status) {
             case UNAUTHORIZED: {
-                error.message = "Incorrect email or password.";
+                error.message = "error:incorrectEmailOrPassword";
             }
         }
 

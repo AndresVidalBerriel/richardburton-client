@@ -5,7 +5,7 @@ export const globalRules = {
         checker: checkNotEmpty,
         onFailure: {
             status: "error",
-            feedback: "This field is required."
+            feedback: "error:requiredField"
         }
     }
 };

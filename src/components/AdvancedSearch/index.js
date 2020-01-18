@@ -23,7 +23,7 @@ export default function AdvancedSearch() {
     };
 
     const handleStepChange = step => {
-        if (step == 0) setCurrentStep(step);
+        if (step === 0) setCurrentStep(step);
     };
 
     return (

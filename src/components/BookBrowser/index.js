@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     retrieveTranslations,
     resetTranslationRetrievalState
@@ -10,10 +11,11 @@ import { Button, Icon } from "antd";
 import LoadingView from "components/LoadingView";
 import Record from "components/BookBrowser/Record";
 import Search from "components/BookBrowser/Search";
+import BookProfilePreview from "components/BookProfilePreview";
 
 import "./style.less";
-import { simpleSearchQuery } from "data/query";
 import { useTranslation } from "react-i18next";
+import { operators, buildSingleRuleQuery } from "data/query";
 
 const PageButton = ({ page, type, disabled }) => (
     <Button type={type} className="page-button" disabled={disabled}>
@@ -24,6 +26,7 @@ const PageButton = ({ page, type, disabled }) => (
 export default function BookBrowser({
     pageSize = 13,
     searchQuery,
+    searchOnDefaultFields,
     hideSearchBar
 }) {
     const { t } = useTranslation();
@@ -37,7 +40,6 @@ export default function BookBrowser({
     const [currentPage, setCurrentPage] = useState(0);
     const [firstLoaded, setFirstLoaded] = useState(false);
     const [displayPage, setDisplayPage] = useState(undefined);
-
     const [searchFor, setSearchFor] = useState(searchQuery);
 
     const firstPageEmpty =
@@ -50,12 +52,21 @@ export default function BookBrowser({
     const onLastPage = firstPageEmpty || nextPageEmpty;
 
     const fetchPage = afterId => {
-        dispatch(retrieveTranslations(afterId, pageSize, searchFor));
+        dispatch(
+            retrieveTranslations(
+                afterId,
+                pageSize,
+                searchFor,
+                searchOnDefaultFields
+            )
+        );
     };
 
     useEffect(() => {
         fetchPage(-1);
     }, []);
+
+    useEffect(() => () => dispatch(resetTranslationRetrievalState()), []);
 
     useEffect(() => {
         dispatch(resetTranslationRetrievalState());
@@ -64,8 +75,6 @@ export default function BookBrowser({
         setFirstLoaded(false);
         setDisplayPage(undefined);
     }, [searchFor]);
-
-    useEffect(() => () => dispatch(resetTranslationRetrievalState()), []);
 
     useEffect(() => {
         if (data && !firstLoaded) {
@@ -90,6 +99,10 @@ export default function BookBrowser({
     }, [pages]);
 
     useEffect(() => {
+        dispatch(resetTranslationRetrievalState());
+    }, [pages[pages.length - 1].data]);
+
+    useEffect(() => {
         setDisplayPage(pages[currentPage].data);
     }, [currentPage]);
 
@@ -109,8 +122,19 @@ export default function BookBrowser({
     };
 
     const handleSearch = value => {
-        const query = simpleSearchQuery(value);
+        const query = buildSingleRuleQuery({
+            operator: operators.STARTS_WITH,
+            value
+        });
         setSearchFor(query);
+    };
+
+    const [selectedBook, setSelectedBook] = useState();
+    const [drawerVisible, setDrawerVisible] = useState(false);
+
+    const handleRecordClick = index => {
+        setSelectedBook(displayPage[index]);
+        setDrawerVisible(true);
     };
 
     return (
@@ -121,7 +145,7 @@ export default function BookBrowser({
                 </header>
             )}
             <div className="book-browser-content">
-                {!displayPage || loading ? (
+                {!displayPage && loading ? (
                     <LoadingView />
                 ) : error ? (
                     <div>Error :(</div>
@@ -136,8 +160,12 @@ export default function BookBrowser({
                             </tr>
                         </thead>
                         <tbody>
-                            {displayPage.map(record => (
-                                <Record key={record.id} {...record} />
+                            {displayPage.map((record, index) => (
+                                <Record
+                                    key={index}
+                                    {...record}
+                                    onClick={() => handleRecordClick(index)}
+                                />
                             ))}
                         </tbody>
                     </table>
@@ -168,6 +196,14 @@ export default function BookBrowser({
                     </Button>
                 </Button.Group>
             </footer>
+
+            {selectedBook && (
+                <BookProfilePreview
+                    book={selectedBook}
+                    visible={drawerVisible}
+                    onClose={() => setDrawerVisible(false)}
+                />
+            )}
         </div>
     );
 }

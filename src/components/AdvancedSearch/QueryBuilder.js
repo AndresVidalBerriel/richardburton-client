@@ -79,7 +79,7 @@ export default function QueryBuilder({ rules, setRules, onDone }) {
                     <Select
                         defaultValue={newRuleField}
                         onChange={value => setNewRuleField(value)}
-                        style={{ width: 180 }}
+                        style={{ width: 130 }}
                     >
                         {Object.keys(fields).map((key, index) => {
                             const field = fields[key];
@@ -94,7 +94,7 @@ export default function QueryBuilder({ rules, setRules, onDone }) {
                     <Select
                         defaultValue={newRuleOperator}
                         onChange={value => setNewRuleOperator(value)}
-                        style={{ width: 100 }}
+                        style={{ width: 130 }}
                     >
                         {Object.keys(operators).map((key, index) => {
                             const operator = operators[key];

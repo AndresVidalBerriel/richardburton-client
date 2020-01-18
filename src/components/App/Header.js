@@ -19,9 +19,9 @@ export default function Header() {
             <h1>Richard Burton</h1>
 
             {loggedUser && (
-                <section className="user-info">
-                    Welcome, {loggedUser.firstName}
-                </section>
+                <div className="welcome">
+                    {t("welcome", { name: loggedUser.firstName })}
+                </div>
             )}
 
             <Button

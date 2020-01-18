@@ -17,9 +17,9 @@ const Field = ({ value, linkTo }) => {
     );
 };
 
-export default function Record({ id, authors, publications, original }) {
+export default function Record({ authors, publications, original, onClick }) {
     return (
-        <tr>
+        <tr onClick={onClick}>
             <Field value={publications[0].title} />
             <Field value={authors.map(a => a.name).join(" & ")} />
             <Field value={original.publications[0].title} />

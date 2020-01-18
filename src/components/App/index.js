@@ -13,8 +13,8 @@ import "./style.less";
 import { useSelector } from "react-redux";
 import LoadingView from "components/LoadingView";
 import BookBrowser from "components/BookBrowser";
-import BookProfile from "components/BookProfile";
 import AdvancedSearch from "components/AdvancedSearch/index";
+import BookManagement from "components/BookManagement/index";
 
 export default function App() {
     const storeReady = useSelector(state => state.root.storeReady);
@@ -28,7 +28,7 @@ export default function App() {
                     <main>
                         <Switch>
                             <Route exact path={routes.HOME}>
-                                <BookBrowser />
+                                <BookBrowser searchOnDefaultFields />
                             </Route>
                             <Route path={routes.ADVANCED_SEARCH}>
                                 <AdvancedSearch />
@@ -39,8 +39,9 @@ export default function App() {
                             <Route path={routes.USER_PROFILE}>
                                 <UserProfile />
                             </Route>
-                            <Route path={routes.BOOK_PROFILE}>
-                                <BookProfile />
+                            <Route path={routes.BOOK_PROFILE}></Route>
+                            <Route path={routes.BOOK_MANAGEMENT}>
+                                <BookManagement />
                             </Route>
                         </Switch>
                     </main>

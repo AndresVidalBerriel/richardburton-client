@@ -1,0 +1,44 @@
+@import "../../theme.less";
+
+.book-profile {
+    .subtitle {
+        margin-top: 3px;
+        font-weight: lighter;
+        font-style: italic;
+    }
+
+    .label {
+        font-weight: bold;
+        margin-right: 10px;
+
+        &:after {
+            content: ":";
+        }
+    }
+
+    section {
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 20px;
+
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+
+    .publication {
+        .field {
+            &:not(:last-child) {
+                margin-right: 10px;
+
+                &:after {
+                    content: ",";
+                }
+            }
+        }
+    }
+}

@@ -2,7 +2,8 @@
     "translation": {
         "submit": "Enviar",
         "loading": "Carregando",
-        "search": "Pesquisar"
+        "search": "Pesquisar",
+        "welcome": "Bem-vindo, {{name}}"
     },
 
     "error": {
@@ -31,13 +32,17 @@
         "title": "Título",
         "author": "Autor",
         "author_plural": "Authors",
+        "year": "Ano",
         "originalTitle": "Título original",
         "original": "Original",
+        "originalYear": "Ano original",
 
         "publications.title": "$t(book:title)",
+        "publications.year": "$t(book:year)",
         "authors.name": "$t(book:translator)",
         "original.publications.title": "$t(book:originalTitle)",
-        "original.authors.name": "$t(book:author)"
+        "original.authors.name": "$t(book:author)",
+        "original.publications.year": "$t(book:originalYear)"
     },
 
     "search": {
@@ -58,7 +63,8 @@
         "operators": {
             "is": "é",
             "above": "acima de",
-            "below": "abaixo de"
+            "below": "abaixo de",
+            "startsWith": "começa com"
         }
     },
 

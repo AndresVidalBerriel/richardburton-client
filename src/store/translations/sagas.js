@@ -5,14 +5,20 @@ import * as actions from "store/translations/actions";
 import TranslationController from "api/controllers/translation";
 
 function* retrieveTranslations(action) {
-    const { afterId, pageSize, searchFor } = action.payload;
+    const {
+        afterId,
+        pageSize,
+        searchFor,
+        searchOnDefaultFields
+    } = action.payload;
 
     try {
         yield put(actions.setTranslationRetrievalLoading());
         const response = yield TranslationController.retrieveTranslations(
             afterId,
             pageSize,
-            searchFor
+            searchFor,
+            searchOnDefaultFields
         );
         yield put(actions.setTranslationRetrievalSuccess(response.data));
     } catch (error) {

@@ -1,16 +1,8 @@
-import * as fields from "data/fields";
-
-const defaultSearchFields = [
-    fields.TRANSLATION_TITLE,
-    fields.TRANSLATION_AUTHOR,
-    fields.ORIGINAL_TITLE,
-    fields.ORIGINAL_AUTHOR
-];
-
 export const operators = {
     IS: "is",
     ABOVE: "above",
-    BELOW: "below"
+    BELOW: "below",
+    STARTS_WITH: "startsWith"
 };
 
 export const connectors = {
@@ -18,36 +10,32 @@ export const connectors = {
     OR: "OR"
 };
 
-export function simpleSearchQuery(string, fields = defaultSearchFields) {
-    if (string) {
-        const words = string.split(" ");
-        const query = fields
-            .map(
-                field =>
-                    `(${words.map(word => `${field}:${word}*`).join(" AND ")})`
-            )
-            .join(" OR ");
+export function buildSingleRuleQuery({ field = "", operator, value }) {
+    if (!value) return value;
 
-        return query;
-    } else return string;
+    const fieldPrefix = field ? `${field}:` : "";
+
+    switch (operator) {
+        case operators.IS:
+            return `(${value
+                .split(" ")
+                .map(word => `${fieldPrefix}${word}`)
+                .join(" AND ")})`;
+
+        case operators.BELOW:
+            return `${fieldPrefix}{* TO ${value}}`;
+
+        case operators.ABOVE:
+            return `${fieldPrefix}{${value} TO *}`;
+
+        case operators.STARTS_WITH:
+            return `(${value
+                .split(" ")
+                .map(word => `${fieldPrefix}${word}*`)
+                .join(" AND ")})`;
+    }
 }
 
 export function buildQueryFromRules(rules, connector) {
-    const mapRuleToQuery = ({ field, operator, value }) => {
-        switch (operator) {
-            case operators.IS:
-                return `(${value
-                    .split(" ")
-                    .map(word => `${field}:${word}`)
-                    .join(" AND ")})`;
-
-            case operators.BELOW:
-                return `${field}:{* TO ${value}}`;
-
-            case operators.ABOVE:
-                return `${field}:{${value} TO *}`;
-        }
-    };
-
-    return rules.map(mapRuleToQuery).join(` ${connector} `);
+    return rules.map(buildSingleRuleQuery).join(` ${connector} `);
 }

@@ -2,7 +2,8 @@
     "translation": {
         "submit": "Submit",
         "loading": "Loading",
-        "search": "Search"
+        "search": "Search",
+        "welcome": "Welcome, {{name}}"
     },
 
     "error": {
@@ -31,13 +32,17 @@
         "title": "Title",
         "author": "Author",
         "author_plural": "Authors",
+        "year": "Year",
         "originalTitle": "Original title",
         "original": "Original",
+        "originalYear": "Original year",
 
         "publications.title": "$t(book:title)",
+        "publications.year": "$t(book:year)",
         "authors.name": "$t(book:translator)",
         "original.publications.title": "$t(book:originalTitle)",
-        "original.authors.name": "$t(book:author)"
+        "original.authors.name": "$t(book:author)",
+        "original.publications.year": "$t(book:originalYear)"
     },
 
     "search": {
@@ -58,7 +63,8 @@
         "operators": {
             "is": "is",
             "above": "above",
-            "below": "below"
+            "below": "below",
+            "startsWith": "starts with"
         }
     },
 

@@ -1,0 +1,37 @@
+@import "../../../theme.less";
+
+span.tag {
+    padding: 2px 10px;
+    background-color: @color-lightgrey;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 5px;
+    white-space: nowrap;
+
+    border: 1px solid @color-lightgrey-2;
+
+    &:not(:last-child) {
+        margin-right: 5px;
+    }
+
+    button {
+        background-color: @color-lightgrey;
+        border: none;
+        padding: 0;
+        display: flex;
+        padding-left: 5px;
+
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            background-color: @color-lightgrey;
+        }
+    }
+}

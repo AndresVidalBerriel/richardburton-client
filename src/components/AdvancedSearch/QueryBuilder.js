@@ -2,15 +2,14 @@ import React, { useState } from "react";
 
 import { Button, Select, Radio } from "antd";
 
-import * as fields from "data/fields";
-import { operators, connectors, buildQueryFromRules } from "data/query";
+import * as fields from "data/fields/book";
+import * as operators from "data/operators";
+import { connectors, buildQueryFromRules } from "data/query";
 import { useInput } from "utils/hooks";
 import { inputRules } from "components/AdvancedSearch/rules";
 import FormInput from "components/utils/FormInput/index";
 import validateForm from "utils/validators/validateForm";
 import { useTranslation, Trans } from "react-i18next";
-import { connect } from "react-redux";
-
 const { Option } = Select;
 
 const Rule = ({ field, operator, value, onRemove }) => {
@@ -39,7 +38,7 @@ export default function QueryBuilder({ rules, setRules, onDone }) {
 
     const inputs = { newRuleValue: useInput("") };
     const [newRuleOperator, setNewRuleOperator] = useState(operators.IS);
-    const [newRuleField, setNewRuleField] = useState(fields.TRANSLATION_TITLE);
+    const [newRuleField, setNewRuleField] = useState(fields.TITLE);
 
     const [connector, setConnector] = useState(connectors.AND);
 

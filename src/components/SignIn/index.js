@@ -75,7 +75,7 @@ export default withRouter(function SignIn({ visible, setVisible, location }) {
             <span className="error">{error && t(error.message)}</span>
 
             <Button htmlType="submit" type="primary" form="sign-in-form">
-                Sign in
+                {t("signIn:submit")}
             </Button>
         </>
     );

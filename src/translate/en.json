@@ -3,7 +3,13 @@
         "submit": "Submit",
         "loading": "Loading",
         "search": "Search",
-        "welcome": "Welcome, {{name}}"
+        "welcome": "Welcome, {{name}}",
+        "nothingSelected": "Nothing selected",
+        "edit": "Edit",
+        "delete": "Delete",
+        "done": "Done",
+        "continue": "Continue",
+        "back": "Back"
     },
 
     "error": {
@@ -13,7 +19,10 @@
         "fullNameFormat": "Please provide first and last names",
         "matchingPasswords": "The provided passwords do not match",
         "emailAlreadyRegistered": "Email already registered",
-        "incorrectEmailOrPassword": "Incorrect email or password"
+        "incorrectEmailOrPassword": "Incorrect email or password",
+        "mustSelectOriginalBook": "You must select an original book, otherwise mark the checkbox to register a new one",
+        "mustRegisterAtLeastOnePublication": "At least one publication must be registered",
+        "mustSelectAtLeastOneAuthor": "At least one author must be selected"
     },
 
     "user": {
@@ -33,6 +42,8 @@
         "author": "Author",
         "author_plural": "Authors",
         "year": "Year",
+        "country": "Country",
+        "publisher": "Publisher",
         "originalTitle": "Original title",
         "original": "Original",
         "originalYear": "Original year",
@@ -42,7 +53,27 @@
         "authors.name": "$t(book:translator)",
         "original.publications.title": "$t(book:originalTitle)",
         "original.authors.name": "$t(book:author)",
-        "original.publications.year": "$t(book:originalYear)"
+        "original.publications.year": "$t(book:originalYear)",
+
+        "placeholder": {
+            "selectedTranslator": "Selected translator",
+            "selectedTranslator_plural": "Selected translators",
+            "selectedAuthor": "Selected author",
+            "selectedAuthor_plural": "Selected authors",
+            "translatorName": "Insert the transltor's name",
+            "authorName": "Insert the author's name",
+
+            "publication": {
+                "title": "Insert the publication's title",
+                "year": "Insert the publication's year",
+                "country": "Select the publication's country",
+                "publisher": "Insert the publication's publisher",
+                "isbn": "Insert the publication's ISBN"
+            },
+
+            "addPublication": "Add publication",
+            "noPublications": "No publications"
+        }
     },
 
     "search": {
@@ -52,6 +83,8 @@
         "buildQuery": "Build query",
         "getResults": "Get results",
         "noResults": "No results",
+
+        "nothingSearched": "Nothing searched",
 
         "connectorSelector": {
             "pre": "Match",
@@ -64,7 +97,8 @@
             "is": "is",
             "above": "above",
             "below": "below",
-            "startsWith": "starts with"
+            "startsWith": "starts with",
+            "resembles": "resembles"
         }
     },
 
@@ -85,5 +119,10 @@
     "signIn": {
         "title": "Sign in to the <1>Richard Burton Platform!</1>",
         "submit": "Sign in"
+    },
+
+    "text": {
+        "originalBookRegistrationIntroduction": "Please complete the form with the data <1>about the original book of brazilian literature</1>. You must select at least one author and register at least one publication (title, year and country required; ISBN and publisher optional). Click on <1>Continue</1> when you're ready.",
+        "translatedBookRegistrationIntroduction": "Please complete the form with the data <1>about the translation</1>. You must select at least one author and register at least one publication (title, year and country required; ISBN and publisher optional). Click on <1>Continue</1> when you're ready."
     }
 }

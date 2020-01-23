@@ -1,3 +1,5 @@
+import { buildSearchQueryString } from "api/utils";
+
 export const sessionEndpoints = {
     signIn: () => ({
         method: "post",
@@ -18,29 +20,32 @@ export const userEndpoints = {
 };
 
 export const translationEndpoints = {
-    retrieveTranslations: (
-        afterId,
-        pageSize,
-        searchFor,
-        searchOnDefaultFields
-    ) => {
-        const queryParams = [];
-
-        if (afterId) queryParams.push(`after-id=${afterId}`);
-        if (pageSize) queryParams.push(`page-size=${pageSize}`);
-        if (searchFor) queryParams.push(`search=${encodeURI(searchFor)}`);
-        if (searchOnDefaultFields) queryParams.push(`use-default-fields=true`);
-
-        const queryString = queryParams.join("&");
-
-        return {
-            method: "get",
-            url: `/translations?${queryString}`
-        };
-    },
+    retrieveTranslations: parameters => ({
+        method: "get",
+        url: `/translations?${buildSearchQueryString(parameters)}`
+    }),
 
     retrieveTranslation: id => ({
         method: "get",
         url: `/translations/${id}`
+    }),
+
+    registerTranslation: () => ({
+        method: "post",
+        url: "/translations"
+    })
+};
+
+export const originalsEndpoints = {
+    retrieveOriginals: parameters => ({
+        method: "get",
+        url: `/originals?${buildSearchQueryString(parameters)}`
+    })
+};
+
+export const authorEndpoints = {
+    retrieveAuthors: parameters => ({
+        method: "get",
+        url: `/authors?${buildSearchQueryString(parameters)}`
     })
 };

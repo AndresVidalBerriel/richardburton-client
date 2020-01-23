@@ -64,7 +64,9 @@ export default function FormInput({
     required,
     validator,
     setValue,
-    Button,
+    InputComponent,
+    children,
+    reset,
     ...input
 }) {
     const { t } = useTranslation();
@@ -72,15 +74,13 @@ export default function FormInput({
     const { suffix, feedback } = processValidator(validator);
     const { setValidator, validate, ...inputProps } = input;
 
-    const InputComponent = (
-        <Input
-            required={required}
-            id={name}
-            suffix={suffix}
-            {...inputProps}
-            onChange={e => setValue(e.target.value)}
-        />
-    );
+    InputComponent = InputComponent || Input;
+
+    const handleChange = e => {
+        if (e !== undefined && e !== null)
+            if (e.target) setValue(e.target.value);
+            else setValue(e);
+    };
 
     return (
         <div className="form-input">
@@ -90,10 +90,17 @@ export default function FormInput({
                 </label>
             )}
 
-            {InputComponent}
-            {Button}
-
             <div className="input-wrapper">
+                <InputComponent
+                    required={required}
+                    id={name}
+                    suffix={suffix}
+                    {...inputProps}
+                    onChange={handleChange}
+                >
+                    {children}
+                </InputComponent>
+
                 <div className="feedback" style={feedback.style}>
                     {t(feedback.value)}
                 </div>

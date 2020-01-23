@@ -1,8 +1,8 @@
-import { checkNotEmpty } from "utils/validators";
+import { checkNotEmpty, checkNotUndefined } from "utils/validators";
 
 export const globalRules = {
     required: {
-        checker: checkNotEmpty,
+        checker: [checkNotUndefined, checkNotEmpty],
         onFailure: {
             status: "error",
             feedback: "error:requiredField"

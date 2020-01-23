@@ -64,7 +64,8 @@
             "is": "é",
             "above": "acima de",
             "below": "abaixo de",
-            "startsWith": "começa com"
+            "startsWith": "começa com",
+            "resembles": "parece com"
         }
     },
 

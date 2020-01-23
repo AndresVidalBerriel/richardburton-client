@@ -15,7 +15,8 @@ import BookProfilePreview from "components/BookProfilePreview";
 
 import "./style.less";
 import { useTranslation } from "react-i18next";
-import { operators, buildSingleRuleQuery } from "data/query";
+import { buildSingleRuleQuery } from "data/query";
+import { STARTS_WITH } from "data/operators";
 
 const PageButton = ({ page, type, disabled }) => (
     <Button type={type} className="page-button" disabled={disabled}>
@@ -53,12 +54,12 @@ export default function BookBrowser({
 
     const fetchPage = afterId => {
         dispatch(
-            retrieveTranslations(
+            retrieveTranslations({
                 afterId,
                 pageSize,
                 searchFor,
                 searchOnDefaultFields
-            )
+            })
         );
     };
 
@@ -123,7 +124,7 @@ export default function BookBrowser({
 
     const handleSearch = value => {
         const query = buildSingleRuleQuery({
-            operator: operators.STARTS_WITH,
+            operator: STARTS_WITH,
             value
         });
         setSearchFor(query);

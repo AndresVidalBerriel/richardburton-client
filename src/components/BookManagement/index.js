@@ -1,8 +1,8 @@
 import React from "react";
 
 import "./style.less";
-import BookCreator from "components/BookCreator";
+import TranslatedBookCreator from "components/TranslatedBookCreator";
 
 export default function BookManagement() {
-    return <BookCreator />;
+    return <TranslatedBookCreator />;
 }

@@ -1,5 +1,9 @@
+export function checkNotUndefined(value) {
+    return value !== undefined;
+}
+
 export function checkNotEmpty(string) {
-    return string.trim().length !== 0;
+    return string !== undefined ? String(string).trim().length !== 0 : true;
 }
 
 export function checkEmailFormat(email) {

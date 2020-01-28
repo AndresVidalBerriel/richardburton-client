@@ -28,34 +28,22 @@ const useBook = initialState => {
 };
 
 export default function TranslatedBookCreator() {
-    const [currentStep, setCurrentStep] = useState(3);
-    const [registerOriginal, setRegisterOriginal] = useState(true);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [registerOriginal, setRegisterOriginal] = useState(false);
 
     const [
         originalBook,
         setOriginalBook,
         setAuthors,
         setOriginalBookPublications
-    ] = useBook({
-        authors: [{ name: "Guillermo Puentes" }, { name: "Victoria Viegas" }],
-        publications: [{ title: "Dom Casmurro", year: 2018, country: "BR" }]
-    });
+    ] = useBook();
 
     const [
         translatedBook,
         setTranslatedBook,
         setTranslators,
         setTranslatedBookPublications
-    ] = useBook({
-        authors: [{ name: "Andrés Vidal" }],
-        publications: [
-            {
-                title: "Dom Casmurro",
-                year: 2020,
-                country: "US"
-            }
-        ]
-    });
+    ] = useBook({ authors: [], publications: [] });
 
     const { loading, data, fetch } = usePromise(
         TranslatedBookController.registerTranslation

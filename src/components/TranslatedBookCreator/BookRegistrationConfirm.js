@@ -6,7 +6,7 @@ import "./style.less";
 
 import BookSummary from "components/TranslatedBookCreator/BookSummary";
 import TranslatedBookController from "api/controllers/translation";
-import usePromise from "utils/hooks/usePromise";
+import useFetch from "utils/hooks/useFetch";
 
 import { ORIGINAL_TITLE } from "data/fields/book";
 import { RESEMBLES } from "data/operators";
@@ -76,7 +76,7 @@ export default function BookRegistrationConfirm({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data, fetch } = usePromise(
+    const { loading, data, fetch } = useFetch(
         TranslatedBookController.retrieveTranslations
     );
 

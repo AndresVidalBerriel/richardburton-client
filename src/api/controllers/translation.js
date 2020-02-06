@@ -13,8 +13,6 @@ export default class TranslatedBookController {
     }
 
     static registerTranslation(translatedBook) {
-        console.log(translatedBook);
-
         const { method, url } = endpoints.registerTranslation();
         return api[method](url, translatedBook);
     }

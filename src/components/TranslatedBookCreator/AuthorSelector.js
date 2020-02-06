@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Input } from "antd";
-import usePromise from "utils/hooks/usePromise";
+import useFetch from "utils/hooks/useFetch";
 import AuthorController from "api/controllers/author";
 import { connectors, buildQueryFromRules } from "data/query";
 import { NAME } from "data/fields/author";
@@ -16,9 +16,7 @@ export default function AuthorSelector({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data, fetch } = usePromise(
-        AuthorController.retrieveAuthors
-    );
+    const { loading, data, fetch } = useFetch(AuthorController.retrieveAuthors);
 
     const [authors, setAuthors] = useState([]);
     const [searchedAuthor, setSearchedAuthor] = useState([]);

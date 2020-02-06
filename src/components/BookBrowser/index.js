@@ -1,10 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import {
-    retrieveTranslations,
-    resetTranslationRetrievalState
-} from "store/translations/actions";
+import React, { useState, useEffect } from "react";
 
 import { Button, Icon } from "antd";
 
@@ -17,6 +11,9 @@ import "./style.less";
 import { useTranslation } from "react-i18next";
 import { buildSingleRuleQuery } from "data/query";
 import { STARTS_WITH } from "data/operators";
+import TranslatedBookController from "api/controllers/translation";
+
+import useFetchPaginator from "utils/hooks/useFetchPaginator";
 
 const PageButton = ({ page, type, disabled }) => (
     <Button type={type} className="page-button" disabled={disabled}>
@@ -31,96 +28,30 @@ export default function BookBrowser({
     hideSearchBar
 }) {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
 
-    const { loading, error, data } = useSelector(
-        state => state.translations.retrieval
-    );
-
-    const [pages, setPages] = useState([{ afterId: -1, data: undefined }]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [firstLoaded, setFirstLoaded] = useState(false);
-    const [displayPage, setDisplayPage] = useState(undefined);
     const [searchFor, setSearchFor] = useState(searchQuery);
 
-    const firstPageEmpty =
-        pages[0] && pages[0].data && pages[0].data.length === 0;
-
-    const nextPage = pages[currentPage + 1];
-    const nextPageEmpty =
-        nextPage && nextPage.data && nextPage.data.length === 0;
-
-    const onLastPage = firstPageEmpty || nextPageEmpty;
-
-    const fetchPage = afterId => {
-        dispatch(
-            retrieveTranslations({
-                afterId,
-                pageSize,
-                searchFor,
-                searchOnDefaultFields
-            })
-        );
-    };
+    const {
+        currentPage,
+        displayPage,
+        pageUp,
+        pageDown,
+        loading,
+        error,
+        onLastPage,
+        reload
+    } = useFetchPaginator(afterId =>
+        TranslatedBookController.retrieveTranslations({
+            afterId,
+            pageSize,
+            searchFor,
+            searchOnDefaultFields
+        })
+    );
 
     useEffect(() => {
-        fetchPage(-1);
-    }, []);
-
-    useEffect(() => () => dispatch(resetTranslationRetrievalState()), []);
-
-    useEffect(() => {
-        dispatch(resetTranslationRetrievalState());
-        setPages([{ afterId: -1, data: undefined }]);
-        setCurrentPage(0);
-        setFirstLoaded(false);
-        setDisplayPage(undefined);
+        reload();
     }, [searchFor]);
-
-    useEffect(() => {
-        if (data && !firstLoaded) {
-            pages[currentPage].data = data;
-
-            if (data.length > 0) {
-                const afterId = data[data.length - 1].id;
-                setPages([...pages, { afterId }]);
-            }
-
-            setDisplayPage(data);
-            setFirstLoaded(true);
-        } else if (data) {
-            pages[pages.length - 1].data = data;
-            setPages([...pages]);
-        }
-    }, [data]);
-
-    useEffect(() => {
-        const { afterId, data } = pages[pages.length - 1];
-        if (!data) fetchPage(afterId);
-    }, [pages]);
-
-    useEffect(() => {
-        dispatch(resetTranslationRetrievalState());
-    }, [pages[pages.length - 1].data]);
-
-    useEffect(() => {
-        setDisplayPage(pages[currentPage].data);
-    }, [currentPage]);
-
-    const pageUp = () => {
-        if (!onLastPage) {
-            setCurrentPage(currentPage + 1);
-            const { data } = pages[pages.length - 1];
-            if (data.length > 0) {
-                const afterId = data[data.length - 1].id;
-                setPages([...pages, { afterId }]);
-            }
-        }
-    };
-
-    const pageDown = () => {
-        if (currentPage > 0) setCurrentPage(currentPage - 1);
-    };
 
     const handleSearch = value => {
         const query = buildSingleRuleQuery({

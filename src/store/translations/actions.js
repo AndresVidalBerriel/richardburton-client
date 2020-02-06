@@ -36,9 +36,9 @@ export const setTranslationRetrievalLoading = () => ({
     type: actionTypes.SET_RETRIEVAL_LOADING
 });
 
-export const setTranslationRetrievalSuccess = data => ({
+export const setTranslationRetrievalSuccess = translation => ({
     type: actionTypes.SET_RETRIEVAL_SUCCESS,
-    payload: { data }
+    payload: { translation }
 });
 
 export const setTranslationRetrievalError = error => ({

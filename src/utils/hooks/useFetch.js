@@ -34,7 +34,7 @@ function PromiseReducer(state, action) {
     }
 }
 
-export default function usePromise(asyncFunction) {
+export default function useFetch(asyncFunction) {
     const [state, dispatch] = useReducer(PromiseReducer, initialState);
 
     const fetch = async (...args) => {

@@ -8,8 +8,6 @@ import { useTranslation } from "react-i18next";
 export default function BookProfilePreview({ book, visible, onClose }) {
     const { t } = useTranslation();
 
-    console.log(book);
-
     const { publications, authors, original } = book;
 
     const drawerHeader = (

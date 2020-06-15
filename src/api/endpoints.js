@@ -4,6 +4,11 @@ export const sessionEndpoints = {
     signIn: () => ({
         method: "post",
         url: "/session"
+    }),
+
+    verifyToken: () => ({
+        method: "head",
+        url: "/session"
     })
 };
 

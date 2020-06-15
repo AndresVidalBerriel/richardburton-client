@@ -9,9 +9,9 @@ export const setSessionLoading = () => ({
     type: actionTypes.SET_SESSION_LOADING
 });
 
-export const setSessionSuccess = user => ({
+export const setSessionSuccess = (user, token) => ({
     type: actionTypes.SET_SESSION_SUCCESS,
-    payload: { user }
+    payload: { user, token }
 });
 
 export const setSessionError = error => ({
@@ -21,4 +21,8 @@ export const setSessionError = error => ({
 
 export const resetSessionState = () => ({
     type: actionTypes.RESET_SESSION_STATE
+});
+
+export const updateSession = () => ({
+    type: actionTypes.UPDATE_SESSION
 });

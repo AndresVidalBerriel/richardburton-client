@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import "./style.less";
 import SignIn from "components/SignIn";
-import { resetSessionState } from "store/session/actions";
+import { resetSession } from "store/session/actions";
 import * as routes from "routes";
 import { useTranslation } from "react-i18next";
 
@@ -84,7 +84,7 @@ export default function SideBar() {
                     <Item
                         icon="lock_outline"
                         text={t("sidebar:signOut")}
-                        onClick={() => dispatch(resetSessionState())}
+                        onClick={() => dispatch(resetSession())}
                     />
                 )}
             </nav>

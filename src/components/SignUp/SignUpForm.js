@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { Button } from "antd";
@@ -11,18 +11,21 @@ import * as validatorRules from "components/SignUp/rules";
 
 import "./style.less";
 
-import { signUp, resetUserCreationState } from "store/users/actions";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 import * as routes from "routes";
 import { useTranslation } from "react-i18next";
 import useInput from "hooks/useInput";
+import useSignUp from "hooks/useSignUp";
 
 export default function SignUpForm() {
     const { t } = useTranslation();
-    const dispatch = useDispatch();
 
-    useEffect(() => () => dispatch(resetUserCreationState()), []);
+    const user = useSelector(state => state.session.user);
+
+    const { message, signUp, reset } = useSignUp();
+
+    useEffect(() => () => reset(), []);
 
     const inputs = {
         email: useInput(""),
@@ -37,7 +40,7 @@ export default function SignUpForm() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        dispatch(resetUserCreationState());
+        reset();
 
         Object.keys(inputs).forEach(name => {
             const input = inputs[name];
@@ -64,13 +67,9 @@ export default function SignUpForm() {
                 }
             });
 
-            dispatch(signUp(data));
+            signUp(data);
         }
     };
-
-    const user = useSelector(state => state.session.user);
-
-    const error = useSelector(state => state.users.creation.error);
 
     return user !== undefined ? (
         <Redirect to={routes.USER_PROFILE_BASE} />
@@ -125,7 +124,7 @@ export default function SignUpForm() {
                 {...inputs.occupation}
             />
             <footer>
-                <span className="error">{error && t(error.message)}</span>
+                <span className="error">{message && t(message)}</span>
                 <Button htmlType="submit">{t("submit")}</Button>
             </footer>
         </form>

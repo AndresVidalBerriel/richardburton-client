@@ -5,6 +5,8 @@ export default class SessionController {
     static signIn(email, authenticationString) {
         const { method, url } = endpoints.signIn();
 
+        console.log("Signing in");
+
         return api[method](url, undefined, {
             auth: {
                 username: email,

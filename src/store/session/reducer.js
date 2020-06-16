@@ -11,12 +11,12 @@ export default function SessionReducer(state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case actionTypes.SET_SESSION_SUCCESS: {
+        case actionTypes.SETUP_SESSION: {
             const { user, token } = payload;
             return { ...initialState, user, token };
         }
 
-        case actionTypes.RESET_SESSION_STATE: {
+        case actionTypes.RESET_SESSION: {
             return { ...initialState };
         }
 

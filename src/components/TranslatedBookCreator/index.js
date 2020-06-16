@@ -52,7 +52,7 @@ export default function TranslatedBookCreator() {
         resetTranslatedBook
     ] = useBook({ authors: [], publications: [] });
 
-    const { loading, data, fetch } = useFetch(
+    const { loading, data, fetch, error } = useFetch(
         TranslatedBookController.registerTranslation
     );
 

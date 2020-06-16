@@ -76,9 +76,11 @@ export default function BookRegistrationConfirm({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data, fetch } = useFetch(
-        TranslatedBookController.retrieveTranslations
-    );
+    const {
+        loading,
+        response: { data },
+        fetch
+    } = useFetch(TranslatedBookController.retrieveTranslations);
 
     const search = () => {
         const queryString = composeQueries(

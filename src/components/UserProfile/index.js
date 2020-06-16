@@ -15,9 +15,12 @@ import UserController from "api/controllers/user";
 export default withRouter(function UserProfile({ history, match }) {
     const loggedUser = useSelector(state => state.session.user);
 
-    const { loading, error, data: user, fetch } = useFetch(
-        UserController.retrieveUser
-    );
+    const {
+        loading,
+        error,
+        response: { data: user },
+        fetch
+    } = useFetch(UserController.retrieveUser);
 
     useEffect(() => {
         let { id } = match.params;

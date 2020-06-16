@@ -3,15 +3,17 @@ import { useReducer } from "react";
 const SET_LOADING = "SET_LOADING";
 const SET_ERROR = "SET_ERROR";
 const SET_SUCCESS = "SET_SUCCESS";
+const RESET_STATE = "RESET_STATE";
 
 const setLoading = () => ({ type: SET_LOADING });
 const setError = error => ({ type: SET_ERROR, payload: { error } });
-const setSuccess = data => ({ type: SET_SUCCESS, payload: { data } });
+const setSuccess = response => ({ type: SET_SUCCESS, payload: { response } });
+const resetState = () => ({ type: RESET_STATE });
 
 const initialState = {
     loading: false,
     error: undefined,
-    data: undefined
+    response: {}
 };
 
 function PromiseReducer(state, action) {
@@ -22,12 +24,15 @@ function PromiseReducer(state, action) {
             return { ...initialState, loading: true };
         }
         case SET_SUCCESS: {
-            const { data } = payload;
-            return { ...initialState, data };
+            const { response } = payload;
+            return { ...initialState, response };
         }
         case SET_ERROR: {
             const { error } = payload;
             return { ...initialState, error };
+        }
+        case RESET_STATE: {
+            return { ...initialState };
         }
         default:
             return state;
@@ -41,11 +46,13 @@ export default function useFetch(asyncFunction) {
         try {
             dispatch(setLoading());
             const response = await asyncFunction(...args);
-            dispatch(setSuccess(response.data));
+            dispatch(setSuccess(response));
         } catch (error) {
             dispatch(setError(error));
         }
     };
 
-    return { ...state, fetch };
+    const reset = () => dispatch(resetState());
+
+    return { ...state, fetch, reset };
 }

@@ -22,9 +22,11 @@ export default function OriginalSelector({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data: books, fetch } = useFetch(
-        OriginalBookController.retrieveOriginals
-    );
+    const {
+        loading,
+        response: { data: books },
+        fetch
+    } = useFetch(OriginalBookController.retrieveOriginals);
 
     const [errorMessage, setErrorMessage] = useState();
 

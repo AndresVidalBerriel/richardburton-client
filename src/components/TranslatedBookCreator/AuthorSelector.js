@@ -16,7 +16,11 @@ export default function AuthorSelector({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data, fetch } = useFetch(AuthorController.retrieveAuthors);
+    const {
+        loading,
+        response: { data },
+        fetch
+    } = useFetch(AuthorController.retrieveAuthors);
 
     const [authors, setAuthors] = useState([]);
     const [searchedAuthor, setSearchedAuthor] = useState([]);

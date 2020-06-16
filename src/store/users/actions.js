@@ -21,26 +21,3 @@ export const setUserCreationError = error => ({
 export const resetUserCreationState = () => ({
     type: actionTypes.RESET_CREATION_STATE
 });
-
-export const retrieveUser = id => ({
-    type: actionTypes.RETRIEVE_USER_REQUEST,
-    payload: { id }
-});
-
-export const setUserRetrievalLoading = () => ({
-    type: actionTypes.SET_RETRIEVAL_LOADING
-});
-
-export const setUserRetrievalSuccess = user => ({
-    type: actionTypes.SET_RETRIEVAL_SUCCESS,
-    payload: { user }
-});
-
-export const setUserRetrievalError = error => ({
-    type: actionTypes.SET_RETRIEVAL_ERROR,
-    payload: { error }
-});
-
-export const resetUserRetrievalState = () => ({
-    type: actionTypes.RESET_RETRIEVAL_STATE
-});

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import "./style.less";
 
-import usePromise from "utils/hooks/usePromise";
+import useFetch from "utils/hooks/useFetch";
 
 import OriginalBookController from "api/controllers/original";
 import { buildQueryFromRules, connectors } from "data/query";
@@ -22,7 +22,7 @@ export default function OriginalSelector({
 }) {
     const { t } = useTranslation();
 
-    const { loading, data: books, fetch } = usePromise(
+    const { loading, data: books, fetch } = useFetch(
         OriginalBookController.retrieveOriginals
     );
 

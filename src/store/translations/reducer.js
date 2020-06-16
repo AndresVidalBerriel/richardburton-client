@@ -2,7 +2,7 @@ import * as actionTypes from "store/users/action-types";
 
 const initialState = {
     creation: { loading: false, error: undefined },
-    retrieval: { loading: false, error: undefined, user: undefined }
+    retrieval: { loading: false, error: undefined, translation: undefined }
 };
 
 export default function TranslationReducer(state = initialState, action) {
@@ -43,18 +43,18 @@ export default function TranslationReducer(state = initialState, action) {
                 ...state.retrieval,
                 loading: true,
                 error: undefined,
-                data: undefined
+                translation: undefined
             };
             return { ...initialState, retrieval };
         }
 
         case actionTypes.SET_RETRIEVAL_SUCCESS: {
-            const { data } = payload;
+            const { translation } = payload;
             const retrieval = {
                 ...state.retrieval,
                 loading: false,
                 error: undefined,
-                data
+                translation
             };
             return { ...state, retrieval };
         }

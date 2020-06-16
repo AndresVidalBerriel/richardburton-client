@@ -8,7 +8,7 @@ import BookRegistrationForm from "components/TranslatedBookCreator/BookRegistrat
 import BookRegistrationConfirm from "components/TranslatedBookCreator/BookRegistrationConfirm";
 
 import { Trans } from "react-i18next";
-import usePromise from "utils/hooks/usePromise";
+import useFetch from "utils/hooks/useFetch";
 import TranslatedBookController from "api/controllers/translation";
 import BookSummary from "components/TranslatedBookCreator/BookSummary";
 
@@ -52,7 +52,7 @@ export default function TranslatedBookCreator() {
         resetTranslatedBook
     ] = useBook({ authors: [], publications: [] });
 
-    const { loading, data, error, fetch } = usePromise(
+    const { loading, data, fetch, error } = useFetch(
         TranslatedBookController.registerTranslation
     );
 

@@ -29,22 +29,6 @@ function* watchSignUpRequest() {
     yield takeEvery(actionTypes.SIGN_UP_REQUEST, signUp);
 }
 
-function* retrieveUser(action) {
-    const { id } = action.payload;
-
-    try {
-        yield put(actions.setUserRetrievalLoading());
-        const response = yield UserController.retrieveUser(id);
-        yield put(actions.setUserRetrievalSuccess(response.data));
-    } catch (error) {
-        yield put(actions.setUserRetrievalError(error));
-    }
-}
-
-function* watchRetrieveUserRequest() {
-    yield takeEvery(actionTypes.RETRIEVE_USER_REQUEST, retrieveUser);
-}
-
 export default function* rootSaga() {
-    yield all([watchSignUpRequest(), watchRetrieveUserRequest()]);
+    yield all([watchSignUpRequest()]);
 }

@@ -38,37 +38,6 @@ export default function UserReducer(state = initialState, action) {
             return { ...state, creation };
         }
 
-        case actionTypes.SET_RETRIEVAL_LOADING: {
-            const retrieval = {
-                ...state.retrieval,
-                loading: true,
-                error: undefined
-            };
-            return { ...initialState, retrieval };
-        }
-
-        case actionTypes.SET_RETRIEVAL_SUCCESS: {
-            const { user } = payload;
-            const retrieval = {
-                ...state.retrieval,
-                loading: false,
-                error: undefined,
-                user
-            };
-            return { ...state, retrieval };
-        }
-
-        case actionTypes.SET_RETRIEVAL_ERROR: {
-            const { error } = payload;
-            const retrieval = { ...state.retrieval, loading: false, error };
-            return { ...state, retrieval };
-        }
-
-        case actionTypes.RESET_RETRIEVAL_STATE: {
-            const retrieval = { ...initialState.retrieval };
-            return { ...state, retrieval };
-        }
-
         default: {
             return state;
         }

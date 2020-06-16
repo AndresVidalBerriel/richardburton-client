@@ -1,14 +1,10 @@
 export default function validateForm(inputs, inputRules, crossInputRules = []) {
     let isValid = true;
 
-    Object.keys(inputs).forEach(name => {
-        const input = inputs[name];
-
+    inputs.forEach(({ name, state: { value, validate } }) => {
         if (crossInputRules.hasOwnProperty(name)) {
             crossInputRules[name].forEach(rule => {
-                rule.useValues = rule.useValuesFrom.map(
-                    name => inputs[name].value
-                );
+                rule.useValues = rule.useValuesFrom.map(() => value);
             });
         } else crossInputRules[name] = [];
 
@@ -18,7 +14,7 @@ export default function validateForm(inputs, inputRules, crossInputRules = []) {
 
         let rule;
         for (rule of rules)
-            if (!input.validate(rule)) {
+            if (!validate(rule)) {
                 isValid = false;
                 break;
             }

@@ -8,7 +8,6 @@ import { createBrowserHistory } from "history";
 import * as actionTypes from "store/root/action-types";
 
 import SessionReducer from "store/session/reducer";
-import TranslationReducer from "store/translations/reducer";
 
 const initialState = {
     storeReady: false
@@ -33,8 +32,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
     root: RootReducer,
     router: connectRouter(history),
-    session: SessionReducer,
-    translations: TranslationReducer
+    session: SessionReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-import { retrieveUser } from "store/users/actions";
-
 import "./style.less";
 
 import LoadingView from "components/LoadingView";

@@ -1,6 +1,5 @@
 import { all, put, takeEvery, select } from "redux-saga/effects";
 import sessionRootSaga from "store/session/sagas";
-import userRootSaga from "store/users/sagas";
 import translationRootSaga from "store/translations/sagas";
 import * as actionTypes from "store/root/action-types";
 
@@ -17,10 +16,5 @@ function* watchReconfigure() {
 }
 
 export default function* rootSaga() {
-    yield all([
-        sessionRootSaga(),
-        userRootSaga(),
-        translationRootSaga(),
-        watchReconfigure()
-    ]);
+    yield all([sessionRootSaga(), translationRootSaga(), watchReconfigure()]);
 }

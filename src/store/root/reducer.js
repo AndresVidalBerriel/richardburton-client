@@ -8,7 +8,6 @@ import { createBrowserHistory } from "history";
 import * as actionTypes from "store/root/action-types";
 
 import SessionReducer from "store/session/reducer";
-import UserReducer from "store/users/reducer";
 import TranslationReducer from "store/translations/reducer";
 
 const initialState = {
@@ -35,7 +34,6 @@ const rootReducer = combineReducers({
     root: RootReducer,
     router: connectRouter(history),
     session: SessionReducer,
-    users: UserReducer,
     translations: TranslationReducer
 });
 

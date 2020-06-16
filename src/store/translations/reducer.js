@@ -1,4 +1,4 @@
-import * as actionTypes from "store/users/action-types";
+import * as actionTypes from "store/translations/action-types";
 
 const initialState = {
     creation: { loading: false, error: undefined },

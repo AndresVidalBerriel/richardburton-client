@@ -22,13 +22,8 @@ export default function useSignIn() {
     }, [response]);
 
     useEffect(() => {
-        if (error !== undefined) {
-            switch (error.response.status) {
-                case UNAUTHORIZED: {
-                    setMessage("error:incorrectEmailOrPassword");
-                }
-            }
-        }
+        if (error !== undefined && error.response.status === UNAUTHORIZED)
+            setMessage("error:incorrectEmailOrPassword");
     }, [error]);
 
     return { loading, message, user: response.data, signIn: fetch, reset };

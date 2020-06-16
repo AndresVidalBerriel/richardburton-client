@@ -7,9 +7,7 @@ import createSagaMiddleware from "redux-saga";
 
 import rootSaga from "store/root/sagas";
 import reducer, { history } from "store/root/reducer";
-import { setStoreReady } from "store/root/actions";
-
-import { setAuthenticationToken } from "api/axios";
+import { reconfigure } from "store/root/actions";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -19,10 +17,7 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store, null, () => {
-    const loggedUser = store.getState().session.user;
-    if (loggedUser !== undefined) setAuthenticationToken(loggedUser.token);
-
-    store.dispatch(setStoreReady(true));
+    store.dispatch(reconfigure());
 });
 
 export { store, persistor, history };

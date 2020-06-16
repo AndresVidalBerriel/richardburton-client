@@ -25,7 +25,7 @@ export default withRouter(function UserProfile({ history, match }) {
             else history.push(routes.HOME);
         }
 
-        dispatch(retrieveUser(id));
+        if (id) dispatch(retrieveUser(id));
     }, [loggedUser]);
 
     return !user && loading ? (

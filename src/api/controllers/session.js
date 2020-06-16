@@ -12,4 +12,10 @@ export default class SessionController {
             }
         });
     }
+
+    static verifyToken() {
+        const { method, url } = endpoints.verifyToken();
+
+        return api[method](url);
+    }
 }

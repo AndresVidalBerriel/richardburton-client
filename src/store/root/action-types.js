@@ -1,1 +1,3 @@
+export const RECONFIGURE = "RECONFIGURE";
+
 export const SET_STORE_READY = "SET_STORE_READY";

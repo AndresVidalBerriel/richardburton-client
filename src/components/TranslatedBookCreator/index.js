@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { Steps } from "antd";
+import { Steps, Modal } from "antd";
 
 import "./style.less";
 import OriginalSelector from "components/TranslatedBookCreator/OriginalSelector";
@@ -10,6 +10,7 @@ import BookRegistrationConfirm from "components/TranslatedBookCreator/BookRegist
 import { Trans } from "react-i18next";
 import useFetch from "utils/hooks/useFetch";
 import TranslatedBookController from "api/controllers/translation";
+import BookSummary from "components/TranslatedBookCreator/BookSummary";
 
 const { Step } = Steps;
 
@@ -24,7 +25,11 @@ const useBook = initialState => {
         setBook(book ? { ...book, publications } : { publications });
     };
 
-    return [book, setBook, setAuthors, setPublications];
+    const reset = () => {
+        setBook(initialState);
+    };
+
+    return [book, setBook, setAuthors, setPublications, reset];
 };
 
 export default function TranslatedBookCreator() {
@@ -35,14 +40,16 @@ export default function TranslatedBookCreator() {
         originalBook,
         setOriginalBook,
         setAuthors,
-        setOriginalBookPublications
+        setOriginalBookPublications,
+        resetOriginalBook
     ] = useBook();
 
     const [
         translatedBook,
         setTranslatedBook,
         setTranslators,
-        setTranslatedBookPublications
+        setTranslatedBookPublications,
+        resetTranslatedBook
     ] = useBook({ authors: [], publications: [] });
 
     const { loading, data, fetch } = useFetch(
@@ -61,9 +68,34 @@ export default function TranslatedBookCreator() {
 
     const registerTranslatedBook = () => {
         translatedBook.original = originalBook;
-
         fetch(translatedBook);
     };
+
+    useEffect(() => {
+        if (data && !error) {
+            Modal.success({
+                title: "Book registered successfully!",
+                content: (
+                    <div className="content">
+                        <h4>Original Book</h4>
+                        <BookSummary book={data.original} />
+                        <h4>Translated Book</h4>
+                        <BookSummary authorAlias="translator" book={data} />
+                    </div>
+                ),
+                onOk: () => {
+                    resetTranslatedBook();
+                    resetOriginalBook();
+                    setCurrentStep(0);
+                }
+            });
+        } else if (error) {
+            Modal.error({
+                title: "Something went wrong during registration.",
+                content: "Maybe this book is already registered?"
+            });
+        }
+    }, [data, error]);
 
     const renderComponent = () => {
         switch (currentStep) {

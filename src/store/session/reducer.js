@@ -16,13 +16,13 @@ export default function SessionReducer(state = initialState, action) {
         }
 
         case actionTypes.SET_SESSION_SUCCESS: {
-            const { user } = payload;
-            return { ...state, loading: false, error: undefined, user };
+            const { user, token } = payload;
+            return { ...initialState, user, token };
         }
 
         case actionTypes.SET_SESSION_ERROR: {
             const { error } = payload;
-            return { ...state, loading: false, error };
+            return { ...initialState, error };
         }
 
         case actionTypes.RESET_SESSION_STATE: {

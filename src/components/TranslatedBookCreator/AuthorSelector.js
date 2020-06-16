@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Input } from "antd";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 import AuthorController from "api/controllers/author";
 import { connectors, buildQueryFromRules } from "data/query";
 import { NAME } from "data/fields/author";

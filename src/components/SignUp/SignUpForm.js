@@ -6,7 +6,6 @@ import { Button } from "antd";
 
 import FormInput from "components/utils/FormInput";
 
-import { useInput } from "utils/hooks";
 import validateForm from "utils/validators/validateForm";
 import * as validatorRules from "components/SignUp/rules";
 
@@ -17,6 +16,7 @@ import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 import * as routes from "routes";
 import { useTranslation } from "react-i18next";
+import useInput from "hooks/useInput";
 
 export default function SignUpForm() {
     const { t } = useTranslation();

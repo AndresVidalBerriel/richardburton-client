@@ -9,7 +9,7 @@ import "./style.less";
 import LoadingView from "components/LoadingView";
 
 import * as routes from "routes";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 import UserController from "api/controllers/user";
 
 export default withRouter(function UserProfile({ history, match }) {

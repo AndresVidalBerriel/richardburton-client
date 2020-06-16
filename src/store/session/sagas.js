@@ -20,7 +20,7 @@ function* updateSession() {
     } catch (error) {
         setAuthenticationToken(undefined);
 
-        yield put(actions.resetSessionState());
+        yield put(actions.resetSession());
     }
 }
 

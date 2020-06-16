@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 import "./style.less";
 
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 
 import OriginalBookController from "api/controllers/original";
 import { buildQueryFromRules, connectors } from "data/query";

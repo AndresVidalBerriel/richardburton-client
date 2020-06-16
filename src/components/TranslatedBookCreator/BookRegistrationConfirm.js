@@ -6,7 +6,7 @@ import "./style.less";
 
 import BookSummary from "components/TranslatedBookCreator/BookSummary";
 import TranslatedBookController from "api/controllers/translation";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 
 import { ORIGINAL_TITLE } from "data/fields/book";
 import { RESEMBLES } from "data/operators";

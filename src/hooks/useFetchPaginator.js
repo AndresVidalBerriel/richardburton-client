@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 
 export default function useFetchPaginator(asyncFunction) {
     const {

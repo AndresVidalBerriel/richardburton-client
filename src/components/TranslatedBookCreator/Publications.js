@@ -3,7 +3,7 @@ import { Button, InputNumber, Select, Modal, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 import countries from "i18n-iso-countries";
 import FormInput from "components/utils/FormInput";
-import { useInput } from "utils/hooks/index";
+import useInput from "hooks/useInput";
 import validateForm from "utils/validators/validateForm";
 import { inputRules } from "components/TranslatedBookCreator/rules";
 

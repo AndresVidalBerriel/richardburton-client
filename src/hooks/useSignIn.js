@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { setupSession } from "store/session/actions";
 import SessionController from "api/controllers/session";
 import { OK, UNAUTHORIZED } from "utils/http-status";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 
 export default function useSignIn() {
     const dispatch = useDispatch();

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import { Modal, Button } from "antd";
@@ -7,7 +6,6 @@ import { Modal, Button } from "antd";
 import { Trans } from "react-i18next";
 
 import FormInput from "components/utils/FormInput";
-import { useInput } from "utils/hooks";
 
 import validateForm from "utils/validators/validateForm";
 import { inputRules } from "components/SignIn/rules";
@@ -16,7 +14,8 @@ import "./style.less";
 import { removeWhitespaceExcess, getHash } from "utils/strings";
 
 import { useTranslation } from "react-i18next";
-import useSignIn from "utils/hooks/useSignIn";
+import useSignIn from "hooks/useSignIn";
+import useInput from "hooks/useInput";
 
 export default withRouter(function SignIn({ visible, setVisible, location }) {
     const { t } = useTranslation();

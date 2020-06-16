@@ -8,7 +8,7 @@ import BookRegistrationForm from "components/TranslatedBookCreator/BookRegistrat
 import BookRegistrationConfirm from "components/TranslatedBookCreator/BookRegistrationConfirm";
 
 import { Trans } from "react-i18next";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 import TranslatedBookController from "api/controllers/translation";
 import BookSummary from "components/TranslatedBookCreator/BookSummary";
 
@@ -52,9 +52,12 @@ export default function TranslatedBookCreator() {
         resetTranslatedBook
     ] = useBook({ authors: [], publications: [] });
 
-    const { loading, data, fetch, error } = useFetch(
-        TranslatedBookController.registerTranslation
-    );
+    const {
+        loading,
+        response: { data },
+        fetch,
+        error
+    } = useFetch(TranslatedBookController.registerTranslation);
 
     const stepForward = () => {
         const step = currentStep === 0 && !registerOriginal ? 2 : 1;

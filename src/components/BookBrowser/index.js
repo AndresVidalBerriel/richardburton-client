@@ -13,7 +13,7 @@ import { buildSingleRuleQuery } from "data/query";
 import { STARTS_WITH } from "data/operators";
 import TranslatedBookController from "api/controllers/translation";
 
-import useFetchPaginator from "utils/hooks/useFetchPaginator";
+import useFetchPaginator from "hooks/useFetchPaginator";
 
 const PageButton = ({ page, type, disabled }) => (
     <Button type={type} className="page-button" disabled={disabled}>

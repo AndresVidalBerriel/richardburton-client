@@ -5,22 +5,13 @@ export const signIn = (email, authenticationString) => ({
     payload: { email, authenticationString }
 });
 
-export const setSessionLoading = () => ({
-    type: actionTypes.SET_SESSION_LOADING
-});
-
-export const setSessionSuccess = (user, token) => ({
-    type: actionTypes.SET_SESSION_SUCCESS,
+export const setupSession = (user, token) => ({
+    type: actionTypes.SETUP_SESSION,
     payload: { user, token }
 });
 
-export const setSessionError = error => ({
-    type: actionTypes.SET_SESSION_ERROR,
-    payload: { error }
-});
-
-export const resetSessionState = () => ({
-    type: actionTypes.RESET_SESSION_STATE
+export const resetSession = () => ({
+    type: actionTypes.RESET_SESSION
 });
 
 export const updateSession = () => ({

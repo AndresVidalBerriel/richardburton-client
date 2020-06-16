@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
-import useFetch from "utils/hooks/useFetch";
+import useFetch from "hooks/useFetch";
 
 export default function useFetchPaginator(asyncFunction) {
-    const { loading, error, data, fetch } = useFetch(asyncFunction);
+    const {
+        loading,
+        error,
+        response: { data },
+        fetch
+    } = useFetch(asyncFunction);
 
     const [pages, setPages] = useState([{ afterId: -1, data: undefined }]);
     const [currentPage, setCurrentPage] = useState(0);
